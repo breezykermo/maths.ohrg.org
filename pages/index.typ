@@ -9,7 +9,7 @@ Our aim as a group is to learn about the interface between mathematics, philosop
 We meet on an an approximately bi-weekly basis during the academic semester.
 This semester (Spring 2026) we are meeting on *Fridays* at *12pm-1.15pm EST*.
 
-To join our mailing list, please email #link("mailto:maths@ohrg.org")[maths\@ohrg.org] with the subject header 'JOIN'. 
+To join our mailing list, please email #link("mailto:maths@ohrg.org?subject=JOIN")[maths\@ohrg.org] with the subject header 'JOIN', and a 1-2 sentence explanation of your interest in the group. 
 
 == Sessions
 ==== Upcoming
@@ -32,6 +32,7 @@ To join our mailing list, please email #link("mailto:maths@ohrg.org")[maths\@ohr
 - _February 20, 2025._ @kriegerConventionHowMeans2015.
 - _February 6, 2025._ @horlSacredChannelsArchaic2018[pp.89-108].
 - _January 24, 2025._ @serresIntroduction1995. 
+- _November 15, 2024._ (cancelled) @joqueRevolutionaryMathematicsArtificial2022. 
 - _October 17, 2024._ @babbageEconomyMachineryManufactures1832[pp.i-50].
 - _October 4, 2025._ @peirceElementsLogic1974[pp.134-173].
 - _September 19, 2024._ @turingIntelligentMachineryHeretical2004 @turingCanDigitalComputers2004. 
