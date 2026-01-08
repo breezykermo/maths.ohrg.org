@@ -3,11 +3,11 @@ set -e
 
 echo "=== Starting build ==="
 
-# Setup paths - use .cache for caching (automatically cached by Cloudflare Pages)
+# Setup paths - use .npm for caching (automatically cached by Cloudflare Pages)
 REPO_DIR="$(pwd)"
-RHEO_CACHE="$REPO_DIR/.cache/rheo-bin"
+RHEO_CACHE="$REPO_DIR/.npm/_rheo/bin"
 RHEO_BIN="$RHEO_CACHE/rheo"
-export CARGO_HOME="$REPO_DIR/.cache/cargo"
+export CARGO_HOME="$REPO_DIR/.npm/_cargo"
 
 # Install Rust toolchain
 if ! command -v rustc &> /dev/null; then
@@ -28,7 +28,7 @@ fi
 
 # Install or use cached rheo binary
 if [ ! -f "$RHEO_BIN" ]; then
-  echo "Installing rheo..."
+  echo "Installing rheo (this will be cached for future builds)..."
 
   cargo install rheo --locked
 
@@ -36,9 +36,9 @@ if [ ! -f "$RHEO_BIN" ]; then
   cp "$CARGO_HOME/bin/rheo" "$RHEO_BIN"
   chmod +x "$RHEO_BIN"
 
-  echo "Rheo installed and cached"
+  echo "Rheo installed and cached to .npm/_rheo/bin/"
 else
-  echo "Using cached rheo binary from previous build"
+  echo "✓ Using cached rheo binary from previous build"
 fi
 
 # Compile with rheo

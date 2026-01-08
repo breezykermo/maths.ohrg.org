@@ -1,0 +1,12 @@
+# Cloudflare Pages configuration
+#
+# Note: Build command and caching must be configured in the Cloudflare Pages UI:
+# - Build command: bash scripts/build.sh
+# - Build cache: Enable "Build cache (beta)" in Settings > Builds & deployments
+#
+# The npm indirection in scripts/build.sh is required because Cloudflare only caches
+# specific package manager directories (.npm/, .cache/yarn, etc), not custom dirs.
+
+name = "maths-ohrg-org"
+compatibility_date = "2025-01-08"
+pages_build_output_dir = "build/html"
