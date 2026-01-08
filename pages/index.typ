@@ -1,10 +1,12 @@
 #let doc-title = "Math(s), Philosophy, History"
 #set document(title: doc-title)
+#show heading.where(level: 1): set heading(numbering: "A.")
 
-= #doc-title
+#title()
 
 #emph(doc-title) is an online reading group run by the #link("https://freecomputinglab.ohrg.org")[Free Computing Lab].
-We read texts at the interface of mathematics, philosophy, and critical theory.
+We read texts at the interface of mathematics, philosophy, and history.
+See @history for more info.
 
 We meet on an an approximately bi-weekly basis during the academic semester.
 This semester (Spring 2026) we are meeting on *Fridays* at *12pm-1.15pm EST*.
@@ -13,10 +15,10 @@ To join our mailing list, please email #link("mailto:maths@ohrg.org?subject=JOIN
 
 Subscribe to our #link("https://calendar.proton.me/api/calendar/v1/url/U1OSzBiOq3bjKvwRiTQ3kI6Z2cWlLYI5YYrOPeIE8pS4QUgX1kSBWOw-v5u1MuFD_kx3FvOu-n4r8YnhrPlzWA==/calendar.ics?CacheKey=BFrX9JrD_1q0xjzlJdo6Vw%3D%3D&PassphraseKey=CukTREmh1ezElZSJscWzB009huxZ55eUWh3rcrxs0po%3D")[public calendar] for upcoming meetings. 
 
-== Sessions
-==== Upcoming
+= Sessions
+=== Upcoming
 - _January 16, 2026._ @vonfoersterUnderstandingUnderstandingEssays2003[pp.1-20, 247-261].
-==== Past 
+=== Past 
 - _December 8, 2025._ @naderiMarkLackFormalism2018.
 - _November 24, 2025._ @millerSutureElementsLogic1977.
 - _October 19, 2025._ @schmidDiagonalMethodDialectical2025.
@@ -44,11 +46,11 @@ Subscribe to our #link("https://calendar.proton.me/api/calendar/v1/url/U1OSzBiOq
 - _July 12, 2024._ @aaronsonWhyPhilosophersShould2013.
 - _June 21, 2024._ @pourciauLogosAnomalousEpisode2019 @pourciauDigitalOcean2022.
 
-== Our history in brief 
+= Our history in brief <history>
 - _June 2024._ First meeting.
 - _November 2024._ First on-site paper presentation and feedback session with our group's core members in Conneticut.
 
-== Our focus
+= Our focus
 As computer science has grown in stature as a discipline in the university, as Moore's law is pushing computing into all the corners of our life and thought, there is no better time to ask why a more robust rapport between mathematics and critical theory has not emerged.
 Is it as simple as the fact that, as Sarah Pourciau seems to suggest, humanistic thought is aligned with the _apeiron_, whereas the sciences by definition rely on 'carving' it up into _peras_ @pourciauDigitalOcean2022?
 Or is there an interdisciplinary space where one can test the waters of a common language? 
