@@ -17,8 +17,8 @@ Subscribe to our #link("https://calendar.proton.me/api/calendar/v1/url/U1OSzBiOq
 
 = Sessions
 === Upcoming
-- _January 23, 2026._ @vonfoersterUnderstandingUnderstandingEssays2003[pp.1-20, 247-261].
 === Past 
+- _January 23, 2026._ @vonfoersterUnderstandingUnderstandingEssays2003[pp.1-20, 247-261].
 - _December 8, 2025._ @naderiMarkLackFormalism2018.
 - _November 24, 2025._ @millerSutureElementsLogic1977.
 - _October 19, 2025._ @schmidDiagonalMethodDialectical2025.
