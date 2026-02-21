@@ -13,7 +13,7 @@ This semester (Spring 2026) we are meeting on *Fridays* at *12pm-1.15pm EST*.
 
 To join our mailing list, please email #link("mailto:maths@ohrg.org?subject=JOIN")[maths\@ohrg.org] with the subject header 'JOIN', and a 1-2 sentence explanation of your interest in the group. 
 
-Subscribe to our #link("https://calendar.proton.me/api/calendar/v1/url/U1OSzBiOq3bjKvwRiTQ3kI6Z2cWlLYI5YYrOPeIE8pS4QUgX1kSBWOw-v5u1MuFD_kx3FvOu-n4r8YnhrPlzWA==/calendar.ics?CacheKey=BFrX9JrD_1q0xjzlJdo6Vw%3D%3D&PassphraseKey=CukTREmh1ezElZSJscWzB009huxZ55eUWh3rcrxs0po%3D")[public calendar] for upcoming meetings. 
+// Subscribe to our #link("https://calendar.proton.me/api/calendar/v1/url/U1OSzBiOq3bjKvwRiTQ3kI6Z2cWlLYI5YYrOPeIE8pS4QUgX1kSBWOw-v5u1MuFD_kx3FvOu-n4r8YnhrPlzWA==/calendar.ics?CacheKey=BFrX9JrD_1q0xjzlJdo6Vw%3D%3D&PassphraseKey=CukTREmh1ezElZSJscWzB009huxZ55eUWh3rcrxs0po%3D")[public calendar] for upcoming meetings. 
 
 = Sessions
 === Upcoming
@@ -68,6 +68,6 @@ Our group is interested in charting and hypothesizing whether the insights of mo
 This brand of secular humanism is significant and resonant in contemporary discussions about 'ethical computer science', or computing for the social good---as these debates (typically) do not hinge upon explicitly religious notions of morality or social determination, but rather point themselves towards an ambiguously modern notion of freedom and the construction of a society that optimizes for this notion.
 
 
-#bibliography("./references.bib", style: "modern-language-association")
+#bibliography("./references.bib", style: "./author-title.csl")
 
 
