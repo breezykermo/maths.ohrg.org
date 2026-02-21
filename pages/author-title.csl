@@ -1089,10 +1089,10 @@
       <!-- TODO: provide container date here when available -->
     </group>
   </macro>
-  <!-- Custom citation: always show Author, Title (+ locator if present) -->
+  <!-- Custom citation: always show Author - Title (+ locator if present) -->
   <citation et-al-min="3" et-al-use-first="1">
     <layout delimiter="; ">
-      <group delimiter=", ">
+      <group delimiter=" - ">
         <!-- Author (last name only, falling back to editor/title-short) -->
         <names variable="composer">
           <name form="short"/>
@@ -1105,17 +1105,19 @@
             <text macro="title-short"/>
           </substitute>
         </names>
-        <!-- Title: quoted for articles/chapters/speeches, italic for books etc. -->
-        <choose>
-          <if match="any" type="article-journal article-magazine article-newspaper chapter paper-conference speech">
-            <text variable="title" quotes="true"/>
-          </if>
-          <else>
-            <text variable="title" font-style="italic"/>
-          </else>
-        </choose>
-        <!-- Locator (e.g. page range passed from @cite) -->
-        <text variable="locator"/>
+        <!-- Title: italic for books, plain for articles/chapters/speeches; locator comma-separated -->
+        <group delimiter=", ">
+          <choose>
+            <if match="any" type="article-journal article-magazine article-newspaper chapter paper-conference speech">
+              <text variable="title"/>
+            </if>
+            <else>
+              <text variable="title" font-style="italic"/>
+            </else>
+          </choose>
+          <!-- Locator (e.g. page range passed from @cite) -->
+          <text variable="locator"/>
+        </group>
       </group>
     </layout>
   </citation>

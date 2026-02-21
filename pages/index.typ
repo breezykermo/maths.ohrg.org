@@ -1,6 +1,6 @@
 #let doc-title = "Math(s), Philosophy, History"
 #set document(title: doc-title)
-#set cite(form: "prose")
+#set cite(form: "normal")
 #show heading.where(level: 1): set heading(numbering: "A.")
 
 #title()
