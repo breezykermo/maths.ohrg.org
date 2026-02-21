@@ -17,8 +17,9 @@ Subscribe to our #link("https://calendar.proton.me/api/calendar/v1/url/U1OSzBiOq
 
 = Sessions
 === Upcoming
-- _February 10, 2026._ @longoConstructedObjectivityMathematics2003.
+- _March 6, 2026._ @husserlOriginGeometry1970.
 === Past 
+- _February 10, 2026._ @longoConstructedObjectivityMathematics2003.
 - _January 23, 2026._ @vonfoersterUnderstandingUnderstandingEssays2003[pp.1-20, 247-261].
 - _December 8, 2025._ @naderiMarkLackFormalism2018.
 - _November 24, 2025._ @millerSutureElementsLogic1977.
