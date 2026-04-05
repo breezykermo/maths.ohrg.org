@@ -18,7 +18,7 @@ To join our mailing list, please email #link("mailto:maths@ohrg.org?subject=JOIN
 
 = Sessions
 === Upcoming
-- _March 10, 2026_ @avigadMathematiciansAgeAI2026.
+- _April 10, 2026_ @avigadMathematiciansAgeAI2026.
 === Past 
 - _March 27, 2026._ @benacerrafWhatNumbersCould1965.
 - _March 6, 2026._ @husserlOriginGeometry1970.
