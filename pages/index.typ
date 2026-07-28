@@ -18,7 +18,7 @@ To join our mailing list, please email #link("mailto:maths@ohrg.org?subject=JOIN
 
 = Sessions
 === Upcoming
-- _August 3, 2026_ @grayPoincareCountermodernism2022.
+- _August 3, 2026_ @grayPoincareCountermodernism2022 and @poincareFoundationsScienceScience2022.
 === Past
 - _July 20, 2026_ @deringerIntroductionPoliticalCalculations2018.
 - _July 6, 2026_ @bernoulliHydrodynamics1968.
