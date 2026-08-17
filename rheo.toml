@@ -1,3 +1,18 @@
-version = "0.5.1"
+version = "0.5.2"
+content_dir = "content"
 formats = ["html"]
-content_dir = "pages"
+
+# `template.typ` is a library, not a page — every other `.typ` under `content/`
+# is a vertebra, so without this it would compile to its own `template.html`
+# (and land in the Atom feed as an empty entry).
+[spine]
+exclude = ["template.typ"]
+
+[html]
+feed_base_url = "https://maths.ohrg.org"
+feed_author = "Free Computing Lab"
+feed_title = "Math(s), Philosophy, History"
+
+[html.assets]
+css_stylesheet = "./style.css"
+js_scripts = "./index.js"

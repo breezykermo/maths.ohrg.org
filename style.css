@@ -1,24 +1,413 @@
+/* Inter, for headings and for an idea's own title — and here also for the body,
+   which is where this site diverges from rookery.ohrg.org (see `body` below).
+   `@import` has to be the FIRST rule in the file — before the `@font-face`
+   blocks — or browsers drop it. Fetched rather than self-hosted, matching
+   rheo.ohrg.org and ohrg.org; Berkeley Mono is self-hosted below because it is
+   licensed and not on any CDN. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;500;600;700&display=swap');
+
+/* ============================================
+   Berkeley Mono
+
+   Four faces, following rookery.ohrg.org and cftw.ohrg.org. The urls are
+   relative to this stylesheet, which rheo emits at `build/html/style.css` — so
+   the files have to end up at `build/html/fonts/`. rheo copies no static
+   directories into the HTML root (`copy` under `[html.assets]` handles
+   `assets/`, not this), so build.sh and the Justfile do that copy after
+   compiling; see the notes there. Until one has run, the wordmark and the idea
+   ids fall back to the generic `monospace`.
+   ============================================ */
+@font-face {
+  font-family: 'Berkeley Mono';
+  src: url('./fonts/BerkeleyMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Berkeley Mono';
+  src: url('./fonts/BerkeleyMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Berkeley Mono';
+  src: url('./fonts/BerkeleyMono-Oblique.ttf') format('truetype');
+  font-weight: 400;
+  font-style: oblique;
+}
+
+@font-face {
+  font-family: 'Berkeley Mono';
+  src: url('./fonts/BerkeleyMono-Bold-Oblique.ttf') format('truetype');
+  font-weight: 700;
+  font-style: oblique;
+}
+
 /* ============================================
    CSS Variables
    ============================================ */
 :root {
   --background-color: #fdfdfd;
   --text-color: #1a1a1a;
-  /* --link-color: #1a1a1a; */
-  --link-color: #9a1e8e;
+  --link-color: #1a1a1a;
   --blockquote-border: #e6e6e6;
   --blockquote-text: #606060;
+  --muted: #6b6b6b;
+  --accent: #9a1e8e;
+  --rule: #e6e6e6;
+  /* Two families, split by what a thing IS rather than by where it sits.
+
+     Berkeley Mono is site furniture and identifiers — the wordmark and a
+     session's `[idea:26-08-03]` id. It marks the parts of the page that are
+     machinery rather than writing.
+
+     Inter is everything that is writing: every heading, and an idea's own
+     title, which is its name. */
+  --mono-font: 'Berkeley Mono', monospace;
+  --heading-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* The wordmark and idea ids are the same kind of thing — small mono labels —
+     so they are the same size, declared once. In `rem`, not `em`: an id sits
+     inside headings of two levels and inside a `#window` summary the footer has
+     already scaled down, and only a root-relative unit comes out the same in
+     all of them. */
+  --label-size: 0.85rem;
+  /* The hover fill an idea id takes, so the header can take the same one. The
+     package injects this value as `--idea-link-color` on its OWN elements,
+     from `THEME.link-color` in content/template.typ — but the header has no
+     `.idea-*` ancestor to inherit it from, so it is written once more here.
+     Keep the two in step.
+
+     Translucent, and `--accent` above is the same hue solid: one magenta at two
+     strengths. The wash goes behind a link on hover; the solid draws every
+     hairline the package and this stylesheet put on the page. */
+  --hover-fill: rgba(154, 30, 142, 0.16);
+  /* What an OUTBOUND link's underline takes on hover, where an internal one
+     takes `--hover-fill` behind it. Read by rookery's own stylesheet for links
+     inside an idea, and by the `a[href^="http"]` rule below for the prose
+     outside one, so both halves of the site agree. The accent rather than the
+     fill: the fill is translucent, and a 2px line drawn in it barely shows. */
+  --idea-external-color: var(--accent);
+
+  /* Must match the Typst `set text(font, size)` in content/template.typ — the
+     KP justifier measures against these metrics (see that file's comment). */
+  --body-font: Inter;
+  --font-size: 16pt;
+}
+
+/* ============================================
+   Header
+
+   Rendered by `site-header` in content/template.typ. The wordmark's anchor is
+   Typst's, wrapped in the class-carrying element, so the selectors here reach
+   through to `a` — see the note in template.typ about why the href cannot be
+   written by hand.
+   ============================================ */
+/* Sticky, so the way back to the index is reachable from anywhere in a long
+   page — and these pages get long: a session carries its reading and whatever
+   notes it accumulates, and an idea's standalone page carries its body plus a
+   context/backlinks footer.
+
+   It needs an opaque `background-color` of its own to sit on: `body`'s
+   background paints the canvas, not this box, so without one the text
+   scrolling underneath would read straight through the bar.
+
+   The rule under it is the SAME colour as the left rule on an idea and on a
+   window — the accent, which is what `THEME.border-color` in
+   content/template.typ injects as `--idea-border-color` on the package's own
+   elements. The header has no `.idea-*` ancestor to inherit that from, so it
+   names the value itself; keep the two in step. The site's one horizontal
+   hairline and its many vertical ones then read as one system. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--accent);
+  padding-top: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.site-header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.5rem;
+  padding-bottom: 0.6rem;
+}
+
+/* `@rheo/rookery-search`'s modal, themed to this site's magenta rather than
+   rookery.ohrg.org's amber. On `.site-header-inner`, not `.rookery-search-
+   trigger`: `#search-modal` emits the trigger button and its `<dialog>` as
+   SIBLINGS, not one wrapping the other, so a custom property has to sit on an
+   ancestor common to both — the dialog rendering in the browser's top layer
+   only changes paint order, not the DOM tree custom properties inherit
+   through, so a shared ancestor still reaches it. */
+.site-header-inner {
+  --rookery-search-fg: var(--text-color);
+  --rookery-search-bg: var(--background-color);
+  --rookery-search-border: var(--accent);
+  --rookery-search-radius: 3px;
+  --rookery-search-hover: var(--hover-fill);
+  --rookery-search-id-color: var(--muted);
+  --rookery-search-mark: var(--hover-fill);
+  /* Neutral, not the theme's magenta: a backdrop dims the whole page behind
+     it, and a magenta dim would tint every colour the theme never touches. No
+     modal width/height override — the package's own defaults already fit
+     this site with no measurement pointing to a better number. */
+  --rookery-search-backdrop: rgba(0, 0, 0, 0.4);
+}
+
+/* Mono and small, like the wordmark and the subscribe label beside it: the
+   search input is site furniture, not writing. */
+.rookery-search-input {
+  font-family: var(--mono-font);
+  font-size: var(--label-size);
+}
+
+.rookery-search-input::placeholder {
+  color: var(--muted);
+}
+
+/* A result's title takes Inter like every idea title on the site, with the id
+   beside it in mono — the same division of labour the rest of the site
+   uses. */
+.rookery-search-title {
+  font-family: var(--heading-font);
+}
+
+.rookery-search-id {
+  font-family: var(--mono-font);
+}
+
+/* The package already asks for an undecorated row, but from inside
+   `@layer rookery-search`, and any `a { text-decoration: underline }` this
+   stylesheet carried would be unlayered and win regardless of order — so if
+   a result ever grows an underline, this is the rule to check. Written
+   defensively; there is no such rule on this site today. */
+.rookery-search-row {
+  text-decoration: none;
+}
+
+/* Takes the subscribe button's own language — muted, brightening to the
+   accent on hover — so the two controls read as one family of header
+   buttons, not two different ones bolted together. `margin-left: auto`
+   moves here from `.subscribe-btn` below: the trigger is now the FIRST of
+   the two right-aligned controls, so it is the one that has to claim the
+   push: an `auto` margin on the second item alone would leave the trigger
+   stranded beside the wordmark instead of beside subscribe. */
+.rookery-search-trigger {
+  margin-left: auto;
+  color: var(--muted);
+  opacity: 0.5;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.rookery-search-trigger:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.rookery-search-icon {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.rookery-search-key {
+  font-family: var(--mono-font);
+}
+
+/* Uppercase, not small-caps. Berkeley Mono is a monospace face: small-caps in
+   it are synthesised by the browser, which scales the capitals down and leaves
+   them sitting at the wrong weight for the rest of the face. Setting the text
+   upper outright gets the real glyphs at their designed proportions. */
+.wordmark a {
+  font-family: var(--mono-font);
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.wordmark.active a,
+.wordmark a:hover {
+  color: var(--accent);
+}
+
+/* The subscribe control sits last in the row, pushed there together with the
+   search trigger before it — `margin-left: auto` lives on
+   `.rookery-search-trigger` now, not here, since the trigger is the FIRST of
+   the two right-aligned controls and so the one that has to claim the push.
+
+   It is a `<button>`, so it starts from the UA's button — its own font, its own
+   border, its own background — and every one of those has to be unset before
+   the header's typography can reach it. What it takes instead is the FOOTER's:
+   mono, `--label-size`, uppercase, letter-spaced. The wordmark at the other end
+   of the row is a size larger, which is the difference between the site's name
+   and a label for one thing on it. */
+.subscribe-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.45em;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--mono-font);
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  opacity: 0.5;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.subscribe-btn:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+/* ============================================
+   Subscribe dialog
+
+   Rendered by `subscribe-dialog` in content/template.typ, opened by the button
+   above. A modal `<dialog>` is drawn in the top layer, above every stacking
+   context on the page including the sticky header's — which is why the header
+   can carry it without its `z-index: 10` mattering either way.
+   ============================================ */
+/* Inheritance does NOT reach into the top layer from wherever the element sits
+   in the document, so the box names its own font, colour and background rather
+   than taking the body's. `--font-size` is 16pt and the dialog's text is
+   furniture rather than prose, so it takes 1rem instead.
+
+   The border is the accent hairline the header, the footer, an idea and a
+   window all draw — the same magenta line, here around four sides instead of
+   one. */
+.subscribe-dialog {
+  box-sizing: border-box;
+  max-width: 22em;
+  width: calc(100% - 2rem);
+  padding: 1.25rem;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--body-font), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1rem;
+  line-height: 1.4;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+
+.subscribe-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.subscribe-dialog-close-form {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 0.5rem 0;
+}
+
+/* `showModal()` autofocuses the first focusable thing in the dialog, which is
+   this button — so it opens wearing a focus ring, and that is correct: it is
+   also where Escape and Tab start from. The ring is the UA's. */
+.dialog-close {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1.1em;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.dialog-close:hover {
+  color: var(--accent);
+}
+
+.subscribe-options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* Two boxes, and the pair is the point: the feed and the mailing list are the
+   same offer through two channels, so neither is styled as the primary one.
+   At rest they sit in the grey `--rule` every other divider on the site uses,
+   and hovering one brings up the accent and the wash behind it — the same pair
+   of values an idea link takes on hover, so the gesture is the site's. */
+.subscribe-option {
+  padding: 0.6em 0.7em;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.subscribe-option:hover {
+  border-color: var(--accent);
+  background-color: var(--hover-fill);
+}
+
+/* The row is the option's NAME next to its icon, and it fills the box — so it
+   drops the underline `a` carries in prose, where an underline would read as
+   one more line inside a box already drawn with two. The box's own hover is
+   what answers the pointer. */
+.subscribe-option-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.subscribe-option-desc {
+  margin: 0.35em 0 0 0;
+  font-size: var(--label-size);
+  color: var(--muted);
+}
+
+/* The one link inside a description ("RSS/Atom reader") keeps its underline and
+   drops the accent hover the `a[href^="http"]` rule above would otherwise give
+   it: it sits inside a box that already answers the pointer as a whole, and a
+   second magenta response inside the first reads as two things happening. */
+.subscribe-option-desc a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.subscribe-option-desc a[href^="http"]:hover {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: auto;
 }
 
 /* ============================================
    Base Layout
    ============================================ */
+/* Every navigational affordance on this site lands on a fragment — an idea's
+   `[idea:26w32-etal]` permalink, an outline row, a backlink, the Context link —
+   and a sticky header would otherwise cover whatever each of them jumped to.
+   Clears the bar plus a little air. */
+html {
+  scroll-padding-top: 4rem;
+}
+
+/* Inter at 16pt for the BODY, where rookery.ohrg.org sets system sans at 1em.
+   Not a preference: the KP justifier emits `--body-font`/`--font-size` as the
+   `data-font`/`data-size` its runtime reads and measures line lengths against,
+   so the browser has to be rendering the same face at the same size that Typst
+   was told about in content/template.typ. Three values, kept in step. */
 body {
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 1em;
-  line-height: 1.3;
+  font-family: var(--body-font), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: var(--font-size);
+  line-height: 1.4;
   margin: 0 auto;
   padding: 50px;
   max-width: 36em;
@@ -27,15 +416,82 @@ body {
 /* ============================================
    Typography
    ============================================ */
+/* Site prose headings — small-caps, since these are section labels rather than
+   an idea's own name. On this site almost every heading IS an idea's, so the
+   rule mostly exists for the ones rookery emits itself (Footnotes, References,
+   Context, Backlinks). */
 h1, h2, h3, h4, h5, h6 {
   color: var(--text-color);
+  font-family: var(--heading-font);
+  font-variant: small-caps;
   font-weight: normal;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
 }
 
-h1 {
-  text-align: center;
+/* An idea's heading is an `h1` only on the standalone page rookery mints for
+   it, where it is the first thing under the header rather than a section break
+   in a longer page. The 1.5em above is the space between one section and the
+   last, and there is no last one here — it just pushed the title down the
+   screen. Mirrors the margin below it instead. */
+h1.idea {
+  margin-top: 0.5em;
+}
+
+/* The site's own name, `#title()` on the homepage — the one heading that is
+   neither a section label nor an idea. Set as written for the same reason
+   `.idea-title` below is: it is a NAME, and small-caps would relabel
+   "Math(s), Philosophy, History" rather than style it — the bracketed `(s)`
+   least of all survives being shrunk to a capital. `:not(.idea)` keeps it off
+   the h1 rookery gives a minted idea page, which is also a direct child here
+   and wants the small margin above rather than this one. */
+.rheo-feed-content > h1:not(.idea) {
+  font-variant: normal;
+  margin-top: 0.5em;
+}
+
+/* An idea's own title — in the heading font, but set as written, NOT forced
+   into small-caps: a title is the idea's NAME ("3 August 2026: Gray and
+   Poincaré on counter-modernism"),
+   and small-caps would relabel it rather than just style it. `.idea-title`
+   (inside `#idea`'s own heading) and `.idea-window-title` (the same title in a
+   `#window`'s summary, a span only because a fold control cannot contain an
+   `<h2>`) show the same title in two shapes, so both get it. */
+.idea-title,
+.idea-window-title {
+  font-family: var(--heading-font);
+  font-variant: normal;
+}
+
+/* A span, not a block: the summary lays its parts out on one line and these
+   margins would break that. */
+.idea-window-title {
+  margin: 0;
+}
+
+/* Any outline this site emits itself carries the package's own outline markup,
+   but not the package's inline `style` attribute — only rookery can write that,
+   and only on elements it emits itself. Inside an idea box the custom property
+   inherits down and this changes nothing; where a list sits outside one, this is
+   what keeps the row rules on the accent instead of falling through to
+   rookery's default purple. */
+.idea-outline {
+  --idea-border-color: var(--accent);
+}
+
+/* The id, in the family the site keeps for machinery, at the size the wordmark
+   uses. It names font AND size itself rather than inheriting either: in
+   `#idea`'s heading it would otherwise take the heading's Inter at heading
+   size, and in a `#window`'s summary — no heading at all — the body's Inter at
+   the footer's reduced size.
+
+   Left as written, neither small-caps nor uppercased: `[idea:26-08-03]` is an
+   identifier to be copied verbatim into `#window("...")`, and a reader who
+   retyped what an uppercased id appeared to say would get it wrong. */
+.idea-label {
+  font-family: var(--mono-font);
+  font-size: var(--label-size);
+  font-variant: normal;
 }
 
 /* ============================================
@@ -46,8 +502,26 @@ a {
   text-decoration: underline;
 }
 
-a:hover {
+/* Two kinds of link, two weights of response. Staying inside the rookery is the
+   ordinary case and keeps the ordinary hover — the whole link dims, the same
+   gesture the wordmark makes. Leaving is the exceptional one, and gets the
+   quieter signal: the underline takes the accent and thickens, the text itself
+   untouched. The difference should be felt rather than read, which is why it is
+   a change of channel and not a louder version of the same change.
+
+   `[href^="http"]` is the test, and it holds because rheo emits every
+   in-project link as a depth-relative path — nothing internal carries a scheme.
+   Inside an idea, rookery's own stylesheet draws the same distinction with the
+   same colours (see `--idea-external-color` above); these rules are for the
+   prose that sits outside one. */
+a:not([href^="http"]):hover {
   opacity: 0.7;
+}
+
+a[href^="http"]:hover {
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.15em;
 }
 
 /* ============================================
@@ -57,8 +531,6 @@ ul, ol {
   padding-left: 2em;
   margin: 1em 0;
 }
-
-li {}
 
 /* ============================================
    Media
@@ -74,11 +546,25 @@ img, video {
    Code
    ============================================ */
 code {
-  font-family: 'Courier New', monospace;
+  font-family: var(--mono-font);
   background-color: #f5f5f5;
   padding: 0.2em 0.4em;
   border-radius: 3px;
-  font-size: 0.9em;
+  font-size: 0.85em;
+}
+
+pre {
+  background-color: #f5f5f5;
+  padding: 1em;
+  border-radius: 3px;
+  overflow-x: auto;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: 1em;
 }
 
 /* ============================================
@@ -94,12 +580,16 @@ blockquote {
 
 hr {
   height: 1px;
-  background-color: var(--blockquote-border); 
-  border: none; /* removes default border */
+  background-color: var(--blockquote-border);
+  border: none;
 }
 
 /* ============================================
    Endnotes
+
+   Footnotes written inside an idea belong to that idea and are listed in its
+   own block by rookery, so this only catches a `#footnote` written outside one
+   — where the package proxies Typst's native function.
    ============================================ */
 section[role="doc-endnotes"] {
   margin-top: 2em;
@@ -111,37 +601,102 @@ section[role="doc-endnotes"] ol li a[role="doc-backlink"] {
   padding-right: 0.2em;
 }
 
-section[role="doc-bibliography"] ul {
-  padding-left: 0;
+/* ============================================
+   Footer
+
+   The header's mirror, and deliberately built out of the same parts: the same
+   inner flex row, the same 0.6rem/1.5rem gap, the same accent hairline (on top
+   here rather than underneath), and the same small mono labels. What the
+   wordmark and the feed icon are to the header, the site links and the
+   colophon are to this — one at each end of the row.
+   ============================================ */
+.site-footer {
+  margin-top: 3rem;
+  border-top: 1px solid var(--accent);
+  padding-bottom: 2rem;
 }
-section[role="doc-bibliography"] li {
-  margin-bottom: 0.5em;
+
+.site-footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.5rem;
+  padding-top: 0.6rem;
+}
+
+/* Three slots, and the outer two share the leftover space equally — that is
+   what puts the middle one on the CONTAINER's centre line rather than on the
+   centre of whatever the other two happen to leave. `margin-left: auto` on the
+   last item would right-align it just as well but would centre the middle one
+   only by accident, and only while the two ends were the same width. */
+.footer-start,
+.colophon {
+  flex: 1 1 0;
+}
+
+.footer-center {
+  flex: 0 1 auto;
+  text-align: center;
+}
+
+.colophon {
+  text-align: right;
+}
+
+/* The slots take the header's typography — mono, uppercase, `--label-size` —
+   because that is what makes the footer read as the header's mirror.
+   `--muted` is for the prose around the links ("Built with"), which is a label
+   rather than a link; the anchors override it below.
+
+   The LINKS take nothing of the header's. Every one of them leaves the site,
+   so hovering one draws the same accent underline an outbound link draws in a
+   sentence. */
+.site-footer-inner {
+  font-family: var(--mono-font);
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+
+/* At rest they carry no underline. Three of them sit in a row of small mono
+   capitals, and underlining all three turns the row into a rule with gaps in
+   it — where the same underline under one link in a paragraph is what marks it
+   out from the prose. */
+.site-footer-inner a {
+  text-decoration: none;
+}
+
+/* The LINE only. Its colour, thickness and offset come from the outbound-link
+   hover in the Links section above, which reaches these because every footer
+   link carries a scheme — so the accent here cannot drift from the accent in
+   the prose. That is also the dependency: a footer link WITHOUT an `http` href
+   would hover with a plain underline instead of the accent one. */
+.site-footer-inner a:hover {
+  text-decoration-line: underline;
 }
 
 /* ============================================
-   Session lists (Section A: Upcoming / Past)
+   Homepage
+
+   The stack of folded sessions. Typst emits each `#window` inside a bare
+   `<figure>`, so the gap between two of them is the UA's own `figure { margin:
+   1em 40px }` — the package zeroes the horizontal half of that (and only for
+   its own figures, via `:has()`), but leaves the vertical, and 1em of it
+   between ten folded one-line summaries reads as ten separate things rather
+   than one list. Halved. Adjacent margins collapse, so 0.5em on each side of
+   the boundary is a 0.5em gap, not 1em.
+
+   Scoped to figures that are DIRECT children of the content div, which on this
+   site means exactly the homepage's windows: the only other windows are the
+   ones rookery renders in an idea page's Backlinks block, and those sit inside
+   `.idea-backlinks`, several levels down. Specificity (0,2,1) beats the
+   package's own (0,1,1), and rookery.css uses no `@layer`, so nothing else is
+   in play.
    ============================================ */
-h4 + ul {
-  display: grid;
-  grid-template-columns: 1fr;
-  list-style: none;
-  padding-left: 0;
-  gap: 0.9em;
-  margin: 0.75em 0;
-}
-
-h4 + ul li > em:first-child {
-  display: block;
-  font-size: 0.82em;
-  opacity: 0.65;
-  margin-bottom: 0.15em;
-}
-
-@media (min-width: 480px) {
-  h4 + ul {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.9em 1.75em;
-  }
+.rheo-feed-content > figure:has(> .idea-window) {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 /* ============================================
@@ -150,6 +705,88 @@ h4 + ul li > em:first-child {
 @media (max-width: 600px) {
   body {
     padding: 12px;
-    font-size: 0.9em;
+    font-size: 14pt;
+  }
+
+  /* Three slots do not fit on one line at this width, and left/centre/right
+     stops meaning anything once they wrap — so they stack, all centred, and
+     the centre slot keeps its place in the middle of the stack. */
+  .site-footer-inner {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .footer-start,
+  .footer-center,
+  .colophon {
+    flex: none;
+    text-align: center;
+  }
+
+  /* No justified text on mobile. index.js tags the content container with
+     `.rheo-kp-skip` so the KP client leaves paragraphs alone (natural
+     wrapping). This `!important` is the no-JS fallback: it beats the package's
+     `.rheo-kp { text-align: justify }` (which loads after this stylesheet). */
+  .rheo-kp {
+    text-align: left !important;
+  }
+
+  /* Icon-only once the header row is this tight. The button keeps its title
+     attribute and the dialog says what it is the moment it opens, so the label
+     is the part that can go. */
+  .subscribe-btn span {
+    display: none;
+  }
+
+  /* A bottom sheet rather than a centred box: the UA's dialog centring drifts
+     off-centre on mobile, where a collapsing toolbar keeps changing what the
+     viewport is. Pinned to the bottom instead, full width, sliding up.
+
+     `width: auto` is load-bearing — it clears the base rule's `calc(100% -
+     2rem)` (and the UA's `dialog { width: fit-content }`) so `left: 0; right:
+     0` alone solve for width. Any explicit width over-constrains the box, and
+     `right` is the one dropped: the sheet would sit flush left with a gap on
+     the right, and a `100%` resolved against a layout viewport wider than the
+     screen would overshoot and give the page a horizontal scrollbar. */
+  .subscribe-dialog {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    max-width: none;
+    width: auto;
+    /* Pinned to the bottom, an unconstrained box grows past the TOP of a short
+       viewport and takes its close button with it. Capped, and scrolling
+       internally instead. `dvh` tracks the collapsing toolbar; the `vh` line
+       above is the fallback where `dvh` is unsupported. */
+    max-height: 85vh;
+    max-height: 85dvh;
+    /* `overflow-y: auto` alone computes `overflow-x` up from `visible` to
+       `auto`, so one long unbroken token inside would make the sheet scroll
+       sideways. Pin the cross axis. `overscroll-behavior` stops a rubber-band
+       at the scroll limit chaining out to the page behind the backdrop. */
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    /* Clear the home indicator / gesture bar. Without it the sheet's last row
+       sits under system chrome and the whole thing reads as not-quite-flush. */
+    padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+    border-radius: 3px 3px 0 0;
+    /* The border is the header's hairline, and the sheet's bottom edge is off
+       the screen — a line drawn there would only ever be a seam against the
+       viewport edge. */
+    border-bottom: none;
+    animation: subscribe-dialog-slide-up 0.2s ease-out;
+  }
+
+  @keyframes subscribe-dialog-slide-up {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
   }
 }

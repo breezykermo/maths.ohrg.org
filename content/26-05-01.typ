@@ -1,0 +1,8 @@
+#import "template.typ": session, template
+
+#set document(title: [1 May 2026: Henkle on the ontology of number], date: datetime(year: 2026, month: 5, day: 1))
+#show: template.with(current-page: "26-05-01")
+
+#session(<26-05-01>, title: [1 May 2026: Henkle on the ontology of number])[
+  We read @henkleOntologyNumberLimits2026.
+]
