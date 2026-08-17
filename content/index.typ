@@ -1,5 +1,5 @@
 #import "template.typ": template
-#import "@rheo/rookery:0.2.0": idea, window
+#import "@rheo/rookery:0.3.0": idea, window
 
 #let doc-title = "Math(s), Philosophy, History"
 #set document(title: doc-title, date: datetime(year: 2026, month: 8, day: 17))
@@ -33,8 +33,6 @@
 
   // Subscribe to our #link("https://calendar.proton.me/api/calendar/v1/url/U1OSzBiOq3bjKvwRiTQ3kI6Z2cWlLYI5YYrOPeIE8pS4QUgX1kSBWOw-v5u1MuFD_kx3FvOu-n4r8YnhrPlzWA==/calendar.ics?CacheKey=BFrX9JrD_1q0xjzlJdo6Vw%3D%3D&PassphraseKey=CukTREmh1ezElZSJscWzB009huxZ55eUWh3rcrxs0po%3D")[public calendar] for upcoming meetings.
 ]
-
-= About
 
 // Windows, not the ideas themselves: both are hatched on `about.typ`, which is
 // where the topbar points and where their content lives. A window is an echo,

@@ -68,8 +68,8 @@
   --mono-font: 'Berkeley Mono', monospace;
   --heading-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   /* The wordmark and idea ids are the same kind of thing — small mono labels —
-     so they are the same size, declared once. In `rem`, not `em`: an id sits
-     inside headings of two levels and inside a `#window` summary the footer has
+     so they are the same size, declared once. In `rem`, not `em`: an id sits in
+     a card's tab, on a minted page's, and in a `#window` summary the footer has
      already scaled down, and only a root-relative unit comes out the same in
      all of them. */
   --label-size: 0.85rem;
@@ -89,6 +89,23 @@
      outside one, so both halves of the site agree. The accent rather than the
      fill: the fill is translucent, and a 2px line drawn in it barely shows. */
   --idea-external-color: var(--accent);
+
+  /* NO `--idea-heading-margin-top` override, and no figure-margin rule under
+     Homepage below: the space around a note is rookery's to set, and from 0.3.0
+     it sets it as a system — the tab straddling the card's top edge carries the
+     space above a heading (`.idea-tab + h*.idea`), and a titleless note's empty
+     heading takes none at all. A site-side halving of either fought that. */
+
+  /* The id's own size, as the PACKAGE's variable rather than as a `font-size`
+     on `.idea-label`: from rookery 0.3.0 the permalink sits in a tab straddling
+     the card's top edge, and the package lifts it by half this value to put the
+     break in the tab rule at the id's vertical middle. Declared here, the glyph
+     and the arithmetic that positions it cannot disagree — a bare `font-size`
+     override moved the id without moving the lift, and the corner came apart.
+
+     The site's own label size, so the ids stay the same small mono label as the
+     wordmark and the nav (rookery's own default is 0.57rem, smaller). */
+  --idea-label-size: var(--label-size);
 
   /* Must match the Typst `set text(font, size)` in content/template.typ — the
      KP justifier measures against these metrics (see that file's comment). */
@@ -126,7 +143,7 @@
   background-color: var(--background-color);
   border-bottom: 1px solid var(--accent);
   padding-top: 0.6rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .site-header-inner {
@@ -467,52 +484,62 @@ body {
    an idea's own name. On this site almost every heading IS an idea's, so the
    rule mostly exists for the ones rookery emits itself (Footnotes, References,
    Context, Backlinks). */
+/* The margins are HALF a typical heading scale (0.75em/0.25em against the
+   1.5em/0.5em this stylesheet carried before): on a site where nearly every
+   block is an idea box with its own left rule, the rule is already doing the
+   work of separating one thing from the next, and a full section's worth of air
+   above each heading on top of that read as gaps rather than as a column. */
 h1, h2, h3, h4, h5, h6 {
   color: var(--text-color);
   font-family: var(--heading-font);
   font-variant: small-caps;
   font-weight: normal;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
+  margin-top: 0.75em;
+  margin-bottom: 0.25em;
 }
 
 /* An idea's heading is an `h1` only on the standalone page rookery mints for
    it, where it is the first thing under the header rather than a section break
-   in a longer page. The 1.5em above is the space between one section and the
+   in a longer page. The 0.75em above is the space between one section and the
    last, and there is no last one here — it just pushed the title down the
    screen. Mirrors the margin below it instead. */
 h1.idea {
-  margin-top: 0.5em;
+  margin-top: 0.25em;
 }
 
 /* A session's date, which it carries as the first heading inside its own body
    (`== 3 August 2026` in content/YY-MM-DD.typ) now that the title carries only
-   the reading. The 1.5em above every heading is the space between one section
+   the reading. The 0.75em above every heading is the space between one section
    and the last, and there is no last one here — the idea's own title is directly
-   above, already contributing 0.5em below itself, so the two collapsed to a
-   1.5em hole between a session's name and its date.
+   above, already contributing 0.25em below itself, so the two collapsed to a
+   hole between a session's name and its date.
 
-   Three selectors for the three places the same body renders: after the idea's
-   `h2` on the session's page, after its `h1` on the minted page (both
-   `.idea + h3`), and as the first child of a `#window`'s body on the homepage.
+   Two selectors for the three places the same body renders: after the head
+   block on the session's page and on the minted page alike (rookery 0.3.0 wraps
+   an idea's permalink tab and its heading in `.idea-head`, so the date is that
+   DIV's sibling, not the heading's — `.idea + h3` matched nothing after the
+   upgrade), and as the first child of a `#window`'s body on the homepage.
    Scoped to a heading in exactly THAT position rather than to `h3` at large, so
    a session that later grows real sub-sections keeps the normal section spacing
    for them. */
-.idea + h3,
+.idea-head + h3,
 .idea-window-body > h3:first-child {
-  margin-top: 0.5em;
+  margin-top: 0.25em;
 }
 
 /* The site's own name, `#title()` on the homepage — the one heading that is
-   neither a section label nor an idea. Set as written for the same reason
-   `.idea-title` below is: it is a NAME, and small-caps would relabel
-   "Math(s), Philosophy, History" rather than style it — the bracketed `(s)`
-   least of all survives being shrunk to a capital. `:not(.idea)` keeps it off
-   the h1 rookery gives a minted idea page, which is also a direct child here
-   and wants the small margin above rather than this one. */
+   neither a section label nor an idea. It takes the SMALL-CAPS of the heading
+   rule above, like "Sessions" under it: the two are the page's only two
+   headings, and a name set as written over a section label set in small caps
+   read as two typographies rather than one. (An idea's title still opts out
+   below — `.idea-title` — because it is a note's NAME rather than a label for a
+   section.) Only the margin is set here: the 1.5em
+   above every heading is the space between one section and the last, and the
+   first thing under the header has no last one.
+   `:not(.idea)` keeps the rule off the h1 rookery gives a minted idea page,
+   which is also a direct child here and takes `h1.idea` above instead. */
 .rheo-feed-content > h1:not(.idea) {
-  font-variant: normal;
-  margin-top: 0.5em;
+  margin-top: 0.25em;
 }
 
 /* An idea's own title — in the heading font, but set as written, NOT forced
@@ -544,18 +571,20 @@ h1.idea {
   --idea-border-color: var(--accent);
 }
 
-/* The id, in the family the site keeps for machinery, at the size the wordmark
-   uses. It names font AND size itself rather than inheriting either: in
-   `#idea`'s heading it would otherwise take the heading's Inter at heading
-   size, and in a `#window`'s summary — no heading at all — the body's Inter at
-   the footer's reduced size.
+/* The id, in the family the site keeps for machinery. Font only: the SIZE is
+   `--idea-label-size` up in the variables block, which the package reads both
+   for the glyph and for the lift that straddles the tab over a card's top edge
+   — set here as a `font-size`, the two would disagree.
+
+   The family still has to be named rather than inherited: in a `#window`
+   summary the id would otherwise take the body's Inter (reduced again inside the
+   footer), and in `#idea`'s tab the ambient face.
 
    Left as written, neither small-caps nor uppercased: `[idea:26-08-03]` is an
    identifier to be copied verbatim into `#window("...")`, and a reader who
    retyped what an uppercased id appeared to say would get it wrong. */
 .idea-label {
   font-family: var(--mono-font);
-  font-size: var(--label-size);
   font-variant: normal;
 }
 
@@ -744,25 +773,15 @@ section[role="doc-endnotes"] ol li a[role="doc-backlink"] {
 /* ============================================
    Homepage
 
-   The stack of folded sessions. Typst emits each `#window` inside a bare
-   `<figure>`, so the gap between two of them is the UA's own `figure { margin:
-   1em 40px }` — the package zeroes the horizontal half of that (and only for
-   its own figures, via `:has()`), but leaves the vertical, and 1em of it
-   between ten folded one-line summaries reads as ten separate things rather
-   than one list. Halved. Adjacent margins collapse, so 0.5em on each side of
-   the boundary is a 0.5em gap, not 1em.
-
-   Scoped to figures that are DIRECT children of the content div, which on this
-   site means exactly the homepage's windows: the only other windows are the
-   ones rookery renders in an idea page's Backlinks block, and those sit inside
-   `.idea-backlinks`, several levels down. Specificity (0,2,1) beats the
-   package's own (0,1,1), and rookery.css uses no `@layer`, so nothing else is
-   in play.
+   NOTHING here about the gap between one note and the next. The stack of folded
+   sessions is spaced by rookery and by the UA's own `figure { margin: 1em 40px }`
+   — the package zeroes the horizontal half of that (and only for its own
+   figures, via `:has()`) and leaves the vertical. This stylesheet used to
+   quarter that vertical margin on `.rheo-feed-content > figure:has(...)`;
+   REMOVED, deliberately, so a note sits where the package puts it. If the list
+   ever wants tightening again, tighten it in the package, where every rookery
+   gets it.
    ============================================ */
-.rheo-feed-content > figure:has(> .idea-window) {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-}
 
 /* ============================================
    Responsive

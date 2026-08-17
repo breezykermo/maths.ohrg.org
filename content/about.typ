@@ -1,5 +1,5 @@
 #import "template.typ": template
-#import "@rheo/rookery:0.2.0": idea
+#import "@rheo/rookery:0.3.0": idea
 
 #set document(title: [About], date: datetime(year: 2026, month: 8, day: 17))
 #show: template.with(current-page: "about")
@@ -9,18 +9,11 @@
 // touched.
 #let rheo-feed-exclude = true
 
-// `focus` and `history` are ordinary ideas, NOT `#session`s — they are the
-// site's standing prose, not meetings, and the tag is what keeps them out of
-// both the homepage's session list and the search corpus (see
-// `session-search-index` in template.typ). Hatching them as ideas rather than
-// leaving them as bare headings does two things: it gives their citations
-// somewhere to resolve (rookery emits a References block per idea, and a
-// citation written outside any idea has no bibliography to be claimed by), and
-// it makes them windowable, which is how the homepage carries them without
-// carrying a second copy of the prose.
-//
-// They are hatched HERE and windowed there, not the other way round: an idea's
-// content lives in exactly one place, and this is the page the topbar points at.
+#idea(<history>, title: [Our history in brief])[
+  - _June 2024._ First meeting.
+  - _November 2024._ First on-site paper presentation and feedback session with our group's core members in Conneticut.
+]
+
 #idea(<focus>, title: [Our focus])[
   As computer science has grown in stature as a discipline in the university, as Moore's law is pushing computing into all the corners of our life and thought, there is no better time to ask why a more robust rapport between mathematics and critical theory has not emerged.
   Is it as simple as the fact that, as Sarah Pourciau seems to suggest, humanistic thought is aligned with the _apeiron_, whereas the sciences by definition rely on 'carving' it up into _peras_ @pourciauDigitalOcean2022?
@@ -37,7 +30,4 @@
   This brand of secular humanism is significant and resonant in contemporary discussions about 'ethical computer science', or computing for the social good---as these debates (typically) do not hinge upon explicitly religious notions of morality or social determination, but rather point themselves towards an ambiguously modern notion of freedom and the construction of a society that optimizes for this notion.
 ]
 
-#idea(<history>, title: [Our history in brief])[
-  - _June 2024._ First meeting.
-  - _November 2024._ First on-site paper presentation and feedback session with our group's core members in Conneticut.
-]
+

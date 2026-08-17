@@ -5,13 +5,13 @@
 // Wrapping it in the site template is how that requirement is met once: a
 // session writes `#show: template.with(...)` and gets the chrome, the prefix,
 // the theme, the bibliography and the `ref` rule together.
-#import "@rheo/rookery:0.2.0": idea, rookery, tags-of
+#import "@rheo/rookery:0.3.0": idea, rookery, tags-of
 // Both imports have to be written HERE, in the site's own file: rheo scans
 // only a project's own `.typ` files for package imports, so a package reached
 // transitively through another one contributes nothing — no stylesheet, no
 // script, and (for rookery) no minted idea pages at all, which would leave the
 // search index with nothing to link to.
-#import "@rheo/rookery-search:0.2.0": search-ideas, search-modal
+#import "@rheo/rookery-search:0.3.0": search-ideas, search-modal
 
 // Client-side Knuth-Plass justification for the HTML target. `justify-template`
 // installs a `show par` rule that routes justified, text-only paragraphs through
@@ -19,7 +19,7 @@
 // rheo auto-injects the package's JS/CSS via its typst.toml `[tool.rheo.html]`
 // (see rheo.toml, where style.css and index.js are re-declared so the project
 // bundle survives the package's bundle).
-#import "@rheo/justify:0.1.0": template as justify-template
+#import "@rheo/justify:0.1.1": template as justify-template
 
 // ---- #session — sugar over tags, exactly as rookery's own #note/#todo -----
 //
