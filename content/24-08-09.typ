@@ -4,5 +4,5 @@
 #show: template.with(current-page: "24-08-09")
 
 #session(<24-08-09>, title: [9 August 2024: Von Neumann on the mathematician])[
-  We read @vonneumannMathematician1947.
+  @vonneumannMathematician1947
 ]

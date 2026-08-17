@@ -4,5 +4,5 @@
 #show: template.with(current-page: "25-05-01")
 
 #session(<25-05-01>, title: [1 May 2025: Rodin on categorial logic and Hegelian dialectics])[
-  We read @rodinCategorialLogicHegelian2013.
+  @rodinCategorialLogicHegelian2013
 ]

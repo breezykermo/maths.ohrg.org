@@ -4,5 +4,5 @@
 #show: template.with(current-page: "24-11-15")
 
 #session(<24-11-15>, title: [15 November 2024: Joque on revolutionary mathematics (cancelled)])[
-  This session was cancelled. The reading was @joqueRevolutionaryMathematicsArtificial2022.
+  @joqueRevolutionaryMathematicsArtificial2022
 ]

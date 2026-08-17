@@ -4,5 +4,5 @@
 #show: template.with(current-page: "25-01-24")
 
 #session(<25-01-24>, title: [24 January 2025: Serres on the history of scientific thought])[
-  We read @serresIntroduction1995.
+  @serresIntroduction1995
 ]

@@ -4,5 +4,5 @@
 #show: template.with(current-page: "25-09-22")
 
 #session(<25-09-22>, title: [22 September 2025: Weatherby on language machines])[
-  We read @weatherbyLanguageMachinesCultural2025[pp.1-40].
+  @weatherbyLanguageMachinesCultural2025[pp.1-40]
 ]

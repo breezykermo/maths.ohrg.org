@@ -4,5 +4,5 @@
 #show: template.with(current-page: "24-08-30")
 
 #session(<24-08-30>, title: [30 August 2024: Gray on the modernist transformation of mathematics])[
-  We read @grayPlatosGhostModernist2008[pp.18-38].
+  @grayPlatosGhostModernist2008[pp.18-38]
 ]

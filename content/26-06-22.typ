@@ -4,5 +4,5 @@
 #show: template.with(current-page: "26-06-22")
 
 #session(<26-06-22>, title: [22 June 2026: Meli on Newton versus Leibniz])[
-  We read @meliEquivalencePriorityNewton1993.
+  @meliEquivalencePriorityNewton1993
 ]

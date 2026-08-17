@@ -4,5 +4,5 @@
 #show: template.with(current-page: "25-07-03")
 
 #session(<25-07-03>, title: [3 July 2025: Mazzotti on reactionary mathematics])[
-  We read @mazzottiReactionaryMathematicsGenealogy2023[pp.128-146].
+  @mazzottiReactionaryMathematicsGenealogy2023[pp.128-146]
 ]

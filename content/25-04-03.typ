@@ -4,5 +4,5 @@
 #show: template.with(current-page: "25-04-03")
 
 #session(<25-04-03>, title: [3 April 2025: Marx's mathematical manuscripts])[
-  We read @marxMathematicalManuscriptsKarl1983[pp.109-119].
+  @marxMathematicalManuscriptsKarl1983[pp.109-119]
 ]

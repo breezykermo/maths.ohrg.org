@@ -4,5 +4,5 @@
 #show: template.with(current-page: "24-10-17")
 
 #session(<24-10-17>, title: [17 October 2024: Babbage on the economy of machinery])[
-  We read @babbageEconomyMachineryManufactures1832[pp.i-50].
+  @babbageEconomyMachineryManufactures1832[pp.i-50]
 ]

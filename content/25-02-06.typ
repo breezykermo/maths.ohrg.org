@@ -4,5 +4,5 @@
 #show: template.with(current-page: "25-02-06")
 
 #session(<25-02-06>, title: [6 February 2025: Hörl on sacred channels])[
-  We read @horlSacredChannelsArchaic2018[pp.89-108].
+  @horlSacredChannelsArchaic2018[pp.89-108]
 ]

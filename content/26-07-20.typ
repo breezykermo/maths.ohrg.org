@@ -4,5 +4,5 @@
 #show: template.with(current-page: "26-07-20")
 
 #session(<26-07-20>, title: [20 July 2026: Deringer on political calculations])[
-  We read @deringerIntroductionPoliticalCalculations2018.
+  @deringerIntroductionPoliticalCalculations2018
 ]

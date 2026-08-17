@@ -4,5 +4,5 @@
 #show: template.with(current-page: "25-10-19")
 
 #session(<25-10-19>, title: [19 October 2025: Schmid on diagonal method and dialectical logic])[
-  We read @schmidDiagonalMethodDialectical2025.
+  @schmidDiagonalMethodDialectical2025
 ]

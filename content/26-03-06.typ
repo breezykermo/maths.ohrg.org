@@ -4,5 +4,5 @@
 #show: template.with(current-page: "26-03-06")
 
 #session(<26-03-06>, title: [6 March 2026: Husserl on the origin of geometry])[
-  We read @husserlOriginGeometry1970.
+  @husserlOriginGeometry1970
 ]

@@ -55,7 +55,7 @@
   --blockquote-border: #e6e6e6;
   --blockquote-text: #606060;
   --muted: #6b6b6b;
-  --accent: #9a1e8e;
+  --accent: #581c87;
   --rule: #e6e6e6;
   /* Two families, split by what a thing IS rather than by where it sits.
 
@@ -79,10 +79,10 @@
      `.idea-*` ancestor to inherit it from, so it is written once more here.
      Keep the two in step.
 
-     Translucent, and `--accent` above is the same hue solid: one magenta at two
+     Translucent, and `--accent` above is the same hue solid: one purple at two
      strengths. The wash goes behind a link on hover; the solid draws every
      hairline the package and this stylesheet put on the page. */
-  --hover-fill: rgba(154, 30, 142, 0.16);
+  --hover-fill: rgba(88, 28, 135, 0.16);
   /* What an OUTBOUND link's underline takes on hover, where an internal one
      takes `--hover-fill` behind it. Read by rookery's own stylesheet for links
      inside an idea, and by the `a[href^="http"]` rule below for the prose
@@ -137,7 +137,7 @@
   padding-bottom: 0.6rem;
 }
 
-/* `@rheo/rookery-search`'s modal, themed to this site's magenta rather than
+/* `@rheo/rookery-search`'s modal, themed to this site's purple rather than
    rookery.ohrg.org's amber. On `.site-header-inner`, not `.rookery-search-
    trigger`: `#search-modal` emits the trigger button and its `<dialog>` as
    SIBLINGS, not one wrapping the other, so a custom property has to sit on an
@@ -152,8 +152,8 @@
   --rookery-search-hover: var(--hover-fill);
   --rookery-search-id-color: var(--muted);
   --rookery-search-mark: var(--hover-fill);
-  /* Neutral, not the theme's magenta: a backdrop dims the whole page behind
-     it, and a magenta dim would tint every colour the theme never touches. No
+  /* Neutral, not the theme's purple: a backdrop dims the whole page behind
+     it, and a purple dim would tint every colour the theme never touches. No
      modal width/height override — the package's own defaults already fit
      this site with no measurement pointing to a better number. */
   --rookery-search-backdrop: rgba(0, 0, 0, 0.4);
@@ -283,7 +283,7 @@
    furniture rather than prose, so it takes 1rem instead.
 
    The border is the accent hairline the header, the footer, an idea and a
-   window all draw — the same magenta line, here around four sides instead of
+   window all draw — the same purple line, here around four sides instead of
    one. */
 .subscribe-dialog {
   box-sizing: border-box;
@@ -375,7 +375,7 @@
 /* The one link inside a description ("RSS/Atom reader") keeps its underline and
    drops the accent hover the `a[href^="http"]` rule above would otherwise give
    it: it sits inside a box that already answers the pointer as a whole, and a
-   second magenta response inside the first reads as two things happening. */
+   second purple response inside the first reads as two things happening. */
 .subscribe-option-desc a {
   color: inherit;
   text-decoration: underline;

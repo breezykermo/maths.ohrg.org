@@ -48,15 +48,15 @@
 #let session(tags: (), ..args) = idea(tags: _dedup-tag("session", tags), ..args)
 
 // The theme: ONE document-wide value, which is why it lives in the one file
-// every vertebra imports. Magenta, carried over from the `--link-color` this
-// site used before it was a rookery — where rookery.ohrg.org is amber and
+// every vertebra imports. A dark purple, deepened from the magenta `--link-color`
+// this site used before it was a rookery — where rookery.ohrg.org is amber and
 // weeknotes.ohrg.org is green, so the three read as the same system without
 // reading as the same site.
 //
 // `border-color` is set EXPLICITLY rather than left to fall through to
 // `link-color`, and that fallthrough is the reason it has to be: `link-color`
 // is a hover FILL, so it is translucent by construction, and a 1px rule drawn
-// in a 16%-alpha magenta is a grey smudge. The two want the same hue at
+// in a 16%-alpha purple is a grey smudge. The two want the same hue at
 // different strengths — the accent solid for every hairline the package draws
 // (the left edge of an idea box and of a window, the rules down an outline's
 // rows, the line above a Footnotes or References block), and the wash behind a
@@ -66,10 +66,10 @@
 // and the prose outside an idea have no `.idea-*` ancestor to inherit the
 // package's injected custom properties from.
 #let THEME = (
-  link-color: "rgba(154, 30, 142, 0.16)",
-  fold-color: "rgba(154, 30, 142, 0.07)",
-  border-color: rgb("#9a1e8e"),
-  date-color: rgb("#8a6a86"),
+  link-color: "rgba(88, 28, 135, 0.16)",
+  fold-color: "rgba(88, 28, 135, 0.07)",
+  border-color: rgb("#581c87"),
+  date-color: rgb("#6f6284"),
 )
 
 // One bibliography for the whole rookery, alongside the theme and for the same

@@ -4,5 +4,5 @@
 #show: template.with(current-page: "25-06-12")
 
 #session(<25-06-12>, title: [12 June 2025: Steingart on axiomatics and high modernism])[
-  We read @steingartAxiomaticsMathematicalThought2023[pp.1-24].
+  @steingartAxiomaticsMathematicalThought2023[pp.1-24]
 ]

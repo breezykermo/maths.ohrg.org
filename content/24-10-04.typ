@@ -4,5 +4,5 @@
 #show: template.with(current-page: "24-10-04")
 
 #session(<24-10-04>, title: [4 October 2024: Peirce on the elements of logic])[
-  We read @peirceElementsLogic1974[pp.134-173].
+  @peirceElementsLogic1974[pp.134-173]
 ]

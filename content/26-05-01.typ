@@ -4,5 +4,5 @@
 #show: template.with(current-page: "26-05-01")
 
 #session(<26-05-01>, title: [1 May 2026: Henkle on the ontology of number])[
-  We read @henkleOntologyNumberLimits2026.
+  @henkleOntologyNumberLimits2026
 ]

@@ -4,5 +4,5 @@
 #show: template.with(current-page: "24-09-19")
 
 #session(<24-09-19>, title: [19 September 2024: Turing on thinking machines])[
-  We read @turingIntelligentMachineryHeretical2004 and @turingCanDigitalComputers2004.
+  @turingIntelligentMachineryHeretical2004 and @turingCanDigitalComputers2004
 ]

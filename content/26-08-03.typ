@@ -4,5 +4,5 @@
 #show: template.with(current-page: "26-08-03")
 
 #session(<26-08-03>, title: [3 August 2026: Gray and Poincaré on counter-modernism])[
-  We read @grayPoincareCountermodernism2022 and selections from @poincareFoundationsScienceScience2022.
+  @grayPoincareCountermodernism2022 and @poincareFoundationsScienceScience2022
 ]

@@ -4,5 +4,5 @@
 #show: template.with(current-page: "24-07-12")
 
 #session(<24-07-12>, title: [12 July 2024: Aaronson on computational complexity])[
-  We read @aaronsonWhyPhilosophersShould2013.
+  @aaronsonWhyPhilosophersShould2013
 ]

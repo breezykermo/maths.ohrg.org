@@ -4,5 +4,5 @@
 #show: template.with(current-page: "25-10-06")
 
 #session(<25-10-06>, title: [6 October 2025: Castelle on high-dimensional communication])[
-  We read @castelleContextualizingHighDimensionalCommunication2025.
+  @castelleContextualizingHighDimensionalCommunication2025
 ]

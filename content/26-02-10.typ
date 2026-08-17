@@ -4,5 +4,5 @@
 #show: template.with(current-page: "26-02-10")
 
 #session(<26-02-10>, title: [10 February 2026: Longo on the constructed objectivity of mathematics])[
-  We read @longoConstructedObjectivityMathematics2003.
+  @longoConstructedObjectivityMathematics2003
 ]

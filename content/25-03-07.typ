@@ -4,5 +4,5 @@
 #show: template.with(current-page: "25-03-07")
 
 #session(<25-03-07>, title: [7 March 2025: Vasiliev on imaginary logic])[
-  We read @vasilievImaginaryNonaristotelianLogic1925.
+  @vasilievImaginaryNonaristotelianLogic1925
 ]
