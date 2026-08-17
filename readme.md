@@ -15,7 +15,8 @@ just build   # one-shot HTML into build/html
 | path | role |
 | --- | --- |
 | `content/template.typ` | site chrome, and the single place rookery is configured — theme, bibliography, `idea-page-template`, and the `#session` helper |
-| `content/index.typ` | the cover: what the group is, the list of every session, and the standing `history` and `focus` ideas |
+| `content/index.typ` | the cover: the `prelude` idea, folded windows on `focus` and `history`, and the list of every session |
+| `content/about.typ` | where the standing `focus` and `history` ideas are hatched; the one topbar entry |
 | `content/YY-MM-DD.typ` | one session, one meeting — the vertebra whose id is its date |
 | `content/references.bib` | one bibliography for the whole rookery |
 | `content/author-title.csl` | the citation style, kept from before the port |
@@ -39,6 +40,16 @@ chronological order — so rheo's spine (lexicographic by filename) reads oldest
 first while the homepage's `sort: "date"` reads newest first. Sections within a
 session, should one accumulate notes, take the session's id plus a suffix
 (`26-08-03-notes`).
+
+A session's title is its reading, and its date is the first heading inside its
+body (`== 3 August 2026`). The title does not repeat the date because the
+`[idea:26-08-03]` permalink beside it already carries it, in every listing the
+session appears in.
+
+The homepage is built from the same parts. Its `prelude` is a titleless idea —
+`#title()` above it already carries the site's name — and `focus` and `history`
+reach it as folded `#window`s rather than as copies, so their content lives on
+`about.typ` alone.
 
 Citations belong to the session that writes them: rookery emits a References
 block per idea, which is what makes each session a self-contained record of its

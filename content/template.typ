@@ -240,15 +240,34 @@
   )
 }
 
-// The header. The wordmark goes through `link(label("index"))` rather than a
-// hand-written href, because rheo rewrites exactly that form into a
+// ============================================================
+// The spine, as data. One entry per topbar page, in reading order.
+// ============================================================
+// `handle` is rheo's own name for a vertebra — the same string a page passes as
+// `current-page`, and the label `#link` resolves against. `index` is not one of
+// them: the wordmark IS the homepage's nav entry, and takes the active state in
+// its place.
+//
+// The sessions are deliberately absent. They are a growing run listed on the
+// homepage and reachable through search; a topbar that grew an entry per meeting
+// would be a second, worse copy of that list.
+#let site-pages = (
+  (handle: "about", title: "About"),
+)
+
+// The header. Every page link goes through `link(label(<handle>))` rather than a
+// hand-written `href`, because rheo rewrites exactly that form into a
 // DEPTH-RELATIVE url — and it has to, since rookery mints each idea its own
 // page one directory down under `ideas/`, where a hand-written `./index.html`
-// would 404. The class-carrying element wraps Typst's `link`, so the CSS hook
-// is `.wordmark a` rather than the anchor itself.
+// would 404. The wordmark and each nav entry are wrapped in an element carrying
+// the class, with Typst's `link` inside it, since only Typst can compute those
+// hrefs — so the CSS hooks are `.wordmark a` and `.site-nav a`, not the anchors
+// themselves.
 //
-// No nav: this site is a homepage and a run of sessions, and the homepage IS
-// the index of every session in the rookery.
+// The nav sits beside the wordmark rather than at the far end: `margin-left:
+// auto` lives on `.rookery-search-trigger` in style.css, so the search and
+// follow controls claim the right of the bar and the nav stays on the left with
+// the name it belongs to.
 //
 // `#search-modal()` emits its trigger button AND its `<dialog>` together, one
 // call — unlike `subscribe-dialog` below, there is no clean way to keep ITS
@@ -259,6 +278,18 @@
   #html.elem("div", attrs: (class: "site-header-inner"))[
     #let wordmark-class = if current-page == "index" { "wordmark active" } else { "wordmark" }
     #html.elem("span", attrs: (class: wordmark-class), link(label("index"))[maths])
+    #html.elem("nav", attrs: (class: "site-nav", aria-label: "Site sections"))[
+      #html.elem(
+        "ul",
+        attrs: (:),
+        site-pages
+          .map(p => {
+            let cls = if p.handle == current-page { "active" } else { "" }
+            html.elem("li", attrs: (class: cls), link(label(p.handle), p.title))
+          })
+          .join(),
+      )
+    ]
     // `index: false` — the island is `session-search-index` above, filtered to
     // the sessions, and two islands under one id would leave the script reading
     // whichever the DOM handed it first.
@@ -281,9 +312,11 @@
 //
 // `link(label("idea:focus"))`, not an href: only Typst can resolve an idea's
 // label to the anchor it lands on, and rheo rewrites that form depth-relatively
-// — so this reaches `index.html#loc-N` from the homepage and
-// `../index.html#loc-N` from a minted session page. The label is the `<focus>`
-// idea hatched in index.typ; the `idea:` prefix is rookery's default.
+// — so this reaches `about.html#loc-N` from a vertebra and
+// `../about.html#loc-N` from a minted session page. The label is the `<focus>`
+// idea hatched in about.typ; the `idea:` prefix is rookery's default. It points
+// straight at the idea rather than at the page the topbar's About entry opens,
+// which is the difference worth keeping the two slots for.
 #let site-footer() = html.elem("footer", attrs: (class: "site-footer"))[
   #html.elem("div", attrs: (class: "site-footer-inner"))[
     #html.elem(

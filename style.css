@@ -236,6 +236,53 @@
   color: var(--accent);
 }
 
+/* The topbar nav, rendered by `site-header` from `site-pages` in
+   content/template.typ. NO `margin-left: auto` here, unlike rookery.ohrg.org's
+   otherwise identical nav: that push lives on `.rookery-search-trigger` above,
+   so the search and follow controls take the right of the bar and the nav stays
+   on the left beside the name it belongs to. Allowed to wrap under the wordmark
+   on a narrow screen rather than being hidden behind a toggle — one entry fits
+   at any width worth designing for. */
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 1rem;
+}
+
+.site-nav li {
+  margin: 0;
+}
+
+/* Uppercase mono at `--label-size`, the same small label the search input and
+   the follow button take: an entry names a thing on the site, and the wordmark
+   at a size larger names the site. Padding and radius sit on the link itself,
+   not on `:hover` — a padding that appeared only on hover would shift the whole
+   bar every time the pointer crossed an entry. Only the background changes, and
+   it is the same 2px/3px fill the package gives an idea id. */
+.site-nav a {
+  font-family: var(--mono-font);
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0 2px;
+  border-radius: 3px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  background-color: var(--hover-fill);
+  color: var(--text-color);
+}
+
+.site-nav li.active a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* The subscribe control sits last in the row, pushed there together with the
    search trigger before it — `margin-left: auto` lives on
    `.rookery-search-trigger` now, not here, since the trigger is the FIRST of
@@ -435,6 +482,24 @@ h1, h2, h3, h4, h5, h6 {
    last, and there is no last one here — it just pushed the title down the
    screen. Mirrors the margin below it instead. */
 h1.idea {
+  margin-top: 0.5em;
+}
+
+/* A session's date, which it carries as the first heading inside its own body
+   (`== 3 August 2026` in content/YY-MM-DD.typ) now that the title carries only
+   the reading. The 1.5em above every heading is the space between one section
+   and the last, and there is no last one here — the idea's own title is directly
+   above, already contributing 0.5em below itself, so the two collapsed to a
+   1.5em hole between a session's name and its date.
+
+   Three selectors for the three places the same body renders: after the idea's
+   `h2` on the session's page, after its `h1` on the minted page (both
+   `.idea + h3`), and as the first child of a `#window`'s body on the homepage.
+   Scoped to a heading in exactly THAT position rather than to `h3` at large, so
+   a session that later grows real sub-sections keeps the normal section spacing
+   for them. */
+.idea + h3,
+.idea-window-body > h3:first-child {
   margin-top: 0.5em;
 }
 
