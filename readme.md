@@ -17,7 +17,7 @@ just build   # one-shot HTML into build/html
 | `content/template.typ` | site chrome, and the single place rookery is configured — theme, bibliography, `idea-page-template`, and the `#session` helper |
 | `content/index.typ` | the cover: the `prelude` idea, folded windows on `focus` and `history`, and the list of every session |
 | `content/about.typ` | where the standing `focus` and `history` ideas are hatched; the one topbar entry |
-| `content/YY-MM-DD.typ` | one session, one meeting — the vertebra whose id is its date |
+| `content/sessions.typ` | every session, one `#session` call per meeting, oldest first |
 | `content/references.bib` | one bibliography for the whole rookery |
 | `content/author-title.csl` | the citation style, kept from before the port |
 | `style.css` | site styling; the packages' own CSS is injected by rheo |
@@ -29,17 +29,29 @@ A session is an `#idea` tagged `session`. The tag is the whole mechanism: the
 homepage lists sessions with `#window(tags: "session", sort: "date")`, and the
 search corpus in `template.typ` is filtered to the same tag, so search answers
 with meetings rather than with the site's standing prose. Adding a session is
-therefore one new file under `content/` and nothing else — no list to edit.
+therefore one new `#session(...)` call appended to `content/sessions.typ` —
+no separate file, no list to edit.
 
 `#session` is sugar over `#idea`, defined in `template.typ` exactly as rookery's
 own `#note` and `#todo` are defined over it. It lives here rather than in the
 package because "session" is this site's vocabulary, not rookery's.
 
-A session's id is its date, `YY-MM-DD`, which sorts lexicographically into
-chronological order — so rheo's spine (lexicographic by filename) reads oldest
-first while the homepage's `sort: "date"` reads newest first. Sections within a
+A session's id is its date, `YY-MM-DD`, passed as the label a `#session(<...>)`
+call is pinned to. Because every session shares one vertebra, `#session` carries
+its date explicitly via `updated:` rather than inheriting it from a per-file
+`#set document(date:)`. Order in the file is chronological, oldest first — the
+homepage's `sort: "date"` reads it newest first regardless. Sections within a
 session, should one accumulate notes, take the session's id plus a suffix
 (`26-08-03-notes`).
+
+`sessions.typ` is itself excluded from the Atom feed (`rheo-feed-exclude`), the
+same as `about.typ` and `index.typ`: it is a listing vertebra, not a post. Rheo
+has no mechanism to date a marrow-minted idea page for the feed (a minted page
+has no source file to parse a date from), so the one-file-per-session feed entry
+this site used to publish is gone along with the per-file structure — the site
+currently ships no Atom feed at all. `feed.xml` stops being generated the moment
+every vertebra is feed-excluded, which is now the case; the subscribe dialog's
+Atom option should be revisited before publishing.
 
 A session's title is its reading, and its date is the first heading inside its
 body (`== 3 August 2026`). The title does not repeat the date because the

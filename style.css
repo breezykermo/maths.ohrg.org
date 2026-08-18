@@ -788,7 +788,11 @@ section[role="doc-endnotes"] ol li a[role="doc-backlink"] {
    ============================================ */
 @media (max-width: 600px) {
   body {
-    padding: 12px;
+    /* `0.5em`, the same value `@rheo/rookery` uses for a note's own indent at
+       every width, so the page's outer margin and the indent inside a note read
+       as one measure rather than two unrelated numbers. Relative, so it tracks
+       the 14pt below it instead of freezing 12px against a resized body. */
+    padding: 0.5em;
     font-size: 14pt;
   }
 
