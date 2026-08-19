@@ -1,4 +1,5 @@
-#import "template.typ": session, template
+#import "template.typ": template
+#import "@rheo/rookery:0.4.0": idea
 
 // A listing vertebra, not a single post — excluded from the feed exactly as
 // about.typ and index.typ are. Each session still gets its own feed-worthy
@@ -6,11 +7,16 @@
 // session-consolidation discussion: rheo has no mechanism to date a
 // marrow-minted idea page in the feed, so per-session feed entries are gone).
 #let rheo-feed-exclude = true
+#let session(tags: (), ..args) = idea(tags: ("session",) + tags, ..args)
 
 #set document(title: [Sessions])
 #show: template.with(current-page: "sessions")
 
-#session(<24-06-21>, title: [Pourciau on number and the digital ocean], updated: datetime(year: 2024, month: 6, day: 21))[
+#session(<24-06-21>, title: [Pourciau on number and the digital ocean], updated: datetime(
+  year: 2024,
+  month: 6,
+  day: 21,
+))[
   == 21 June 2024
 
   @pourciauLogosAnomalousEpisode2019 and @pourciauDigitalOcean2022
@@ -34,7 +40,11 @@
   @vonneumannMathematician1947
 ]
 
-#session(<24-08-30>, title: [Gray on the modernist transformation of mathematics], updated: datetime(year: 2024, month: 8, day: 30))[
+#session(<24-08-30>, title: [Gray on the modernist transformation of mathematics], updated: datetime(
+  year: 2024,
+  month: 8,
+  day: 30,
+))[
   == 30 August 2024
 
   @grayPlatosGhostModernist2008[pp.18-38]
@@ -58,13 +68,21 @@
   @babbageEconomyMachineryManufactures1832[pp.i-50]
 ]
 
-#session(<24-11-15>, title: [Joque on revolutionary mathematics (cancelled)], updated: datetime(year: 2024, month: 11, day: 15))[
+#session(<24-11-15>, title: [Joque on revolutionary mathematics (cancelled)], updated: datetime(
+  year: 2024,
+  month: 11,
+  day: 15,
+))[
   == 15 November 2024
 
   @joqueRevolutionaryMathematicsArtificial2022
 ]
 
-#session(<25-01-24>, title: [Serres on the history of scientific thought], updated: datetime(year: 2025, month: 1, day: 24))[
+#session(<25-01-24>, title: [Serres on the history of scientific thought], updated: datetime(
+  year: 2025,
+  month: 1,
+  day: 24,
+))[
   == 24 January 2025
 
   @serresIntroduction1995
@@ -94,13 +112,21 @@
   @marxMathematicalManuscriptsKarl1983[pp.109-119]
 ]
 
-#session(<25-04-17>, title: [Warwick on Cambridge mathematical physics], updated: datetime(year: 2025, month: 4, day: 17))[
+#session(<25-04-17>, title: [Warwick on Cambridge mathematical physics], updated: datetime(
+  year: 2025,
+  month: 4,
+  day: 17,
+))[
   == 17 April 2025
 
   @warwickMastersTheoryCambridge2003[pp.ix-xi, 212-226]
 ]
 
-#session(<25-05-01>, title: [Rodin on categorial logic and Hegelian dialectics], updated: datetime(year: 2025, month: 5, day: 1))[
+#session(<25-05-01>, title: [Rodin on categorial logic and Hegelian dialectics], updated: datetime(
+  year: 2025,
+  month: 5,
+  day: 1,
+))[
   == 1 May 2025
 
   @rodinCategorialLogicHegelian2013
@@ -112,7 +138,11 @@
   @marxMythMartiansGolden1996
 ]
 
-#session(<25-06-12>, title: [Steingart on axiomatics and high modernism], updated: datetime(year: 2025, month: 6, day: 12))[
+#session(<25-06-12>, title: [Steingart on axiomatics and high modernism], updated: datetime(
+  year: 2025,
+  month: 6,
+  day: 12,
+))[
   == 12 June 2025
 
   @steingartAxiomaticsMathematicalThought2023[pp.1-24]
@@ -130,7 +160,11 @@
   @berkeleyAnalystDiscourseAddressed1754
 ]
 
-#session(<25-08-01>, title: [Mehrtens on nationalism and internationalism], updated: datetime(year: 2025, month: 8, day: 1))[
+#session(<25-08-01>, title: [Mehrtens on nationalism and internationalism], updated: datetime(
+  year: 2025,
+  month: 8,
+  day: 1,
+))[
   == 1 August 2025
 
   @mehrtensNationalismInternationalism1996
@@ -142,13 +176,21 @@
   @weatherbyLanguageMachinesCultural2025[pp.1-40]
 ]
 
-#session(<25-10-06>, title: [Castelle on high-dimensional communication], updated: datetime(year: 2025, month: 10, day: 6))[
+#session(<25-10-06>, title: [Castelle on high-dimensional communication], updated: datetime(
+  year: 2025,
+  month: 10,
+  day: 6,
+))[
   == 6 October 2025
 
   @castelleContextualizingHighDimensionalCommunication2025
 ]
 
-#session(<25-10-19>, title: [Schmid on diagonal method and dialectical logic], updated: datetime(year: 2025, month: 10, day: 19))[
+#session(<25-10-19>, title: [Schmid on diagonal method and dialectical logic], updated: datetime(
+  year: 2025,
+  month: 10,
+  day: 19,
+))[
   == 19 October 2025
 
   @schmidDiagonalMethodDialectical2025
@@ -166,13 +208,21 @@
   @naderiMarkLackFormalism2018
 ]
 
-#session(<26-01-23>, title: [Von Foerster on understanding understanding], updated: datetime(year: 2026, month: 1, day: 23))[
+#session(<26-01-23>, title: [Von Foerster on understanding understanding], updated: datetime(
+  year: 2026,
+  month: 1,
+  day: 23,
+))[
   == 23 January 2026
 
   @vonfoersterUnderstandingUnderstandingEssays2003[pp.1-20, 247-261]
 ]
 
-#session(<26-02-10>, title: [Longo on the constructed objectivity of mathematics], updated: datetime(year: 2026, month: 2, day: 10))[
+#session(<26-02-10>, title: [Longo on the constructed objectivity of mathematics], updated: datetime(
+  year: 2026,
+  month: 2,
+  day: 10,
+))[
   == 10 February 2026
 
   @longoConstructedObjectivityMathematics2003
@@ -184,13 +234,21 @@
   @husserlOriginGeometry1970
 ]
 
-#session(<26-03-27>, title: [Benacerraf on what numbers could not be], updated: datetime(year: 2026, month: 3, day: 27))[
+#session(<26-03-27>, title: [Benacerraf on what numbers could not be], updated: datetime(
+  year: 2026,
+  month: 3,
+  day: 27,
+))[
   == 27 March 2026
 
   @benacerrafWhatNumbersCould1965
 ]
 
-#session(<26-04-10>, title: [Avigad on mathematicians in the age of AI], updated: datetime(year: 2026, month: 4, day: 10))[
+#session(<26-04-10>, title: [Avigad on mathematicians in the age of AI], updated: datetime(
+  year: 2026,
+  month: 4,
+  day: 10,
+))[
   == 10 April 2026
 
   @avigadMathematiciansAgeAI2026
@@ -202,7 +260,11 @@
   @henkleOntologyNumberLimits2026
 ]
 
-#session(<26-06-08>, title: [Atiyah on mathematics in the 20th century], updated: datetime(year: 2026, month: 6, day: 8))[
+#session(<26-06-08>, title: [Atiyah on mathematics in the 20th century], updated: datetime(
+  year: 2026,
+  month: 6,
+  day: 8,
+))[
   == 8 June 2026
 
   @atiyahMathematics20thCentury2002

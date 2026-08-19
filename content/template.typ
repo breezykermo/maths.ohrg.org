@@ -1,5 +1,5 @@
-#import "@rheo/rookery:0.3.0": idea, rookery
-#import "@rheo/rookery-search:0.3.0": search-modal
+#import "@rheo/rookery:0.4.0": idea, rookery
+#import "@rheo/rookery-search:0.4.0": search-modal
 #import "@rheo/justify:0.1.1": template as justify-template
 
 // ---- #session — sugar over tags, exactly as rookery's own #note/#todo -----
@@ -8,8 +8,8 @@
 // ordinary `#idea` carrying the tag "session", and that tag is what the
 // homepage's `#window` selects and what the search corpus below is restricted
 // to.
-#let _dedup-tag(tag, tags) = if tag in tags { tags } else { (tag,) + tags }
-#let session(tags: (), ..args) = idea(tags: _dedup-tag("session", tags), ..args)
+// #let _dedup-tag(tag, tags) = if tag in tags { tags } else { (tag,) + tags }
+#let session(tags: (), ..args) = idea(tags: ("session",) + tags, ..args)
 
 #let THEME = (
   link-color: "rgba(88, 28, 135, 0.16)",
@@ -113,11 +113,7 @@
 // list. Anything else — any other standing page `content/` grows — joins the
 // topbar the moment it exists, with no list here to remember to edit.
 #let site-pages = (
-  sys
-    .inputs
-    .at("rheo-context", default: (spine-flat: ()))
-    .spine-flat
-    .filter(v => v.handle not in ("index", "sessions"))
+  sys.inputs.at("rheo-context", default: (spine-flat: ())).spine-flat.filter(v => v.handle not in ("index", "sessions"))
 )
 
 // The header. Every page link goes through `link(label(<handle>))` rather than a

@@ -1,5 +1,5 @@
 #import "template.typ": template
-#import "@rheo/rookery:0.3.0": idea, window
+#import "@rheo/rookery:0.4.0": idea, window
 
 #let doc-title = "Math(s), Philosophy, History"
 #set document(title: doc-title, date: datetime(year: 2026, month: 8, day: 17))
