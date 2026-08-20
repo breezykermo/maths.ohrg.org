@@ -4,11 +4,6 @@
 #set document(title: [About], date: datetime(year: 2026, month: 8, day: 17))
 #show: template.with(current-page: "about")
 
-// Standing prose, not a session: there is nothing here for an Atom reader to be
-// told about, and an entry for it would arrive dated whenever this page was last
-// touched.
-#let rheo-feed-exclude = true
-
 #idea(<history>, title: [Our history in brief])[
   - _June 2024._ First meeting.
   - _November 2024._ First on-site paper presentation and feedback session with our group's core members in Conneticut.

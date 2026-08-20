@@ -1,4 +1,4 @@
-version = "0.5.2"
+version = "0.6.0"
 content_dir = "content"
 formats = ["html"]
 
@@ -7,11 +7,6 @@ formats = ["html"]
 # (and land in the Atom feed as an empty entry).
 [spine]
 exclude = ["template.typ"]
-
-[html]
-feed_base_url = "https://maths.ohrg.org"
-feed_author = "Free Computing Lab"
-feed_title = "Math(s), Philosophy, History"
 
 [html.assets]
 css_stylesheet = "./style.css"

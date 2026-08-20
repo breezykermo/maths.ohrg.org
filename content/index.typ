@@ -1,11 +1,34 @@
 #import "template.typ": template
-#import "@rheo/rookery:0.4.0": idea, window
+#import "@rheo/rookery:0.4.0": idea, ideas, window
+#import "@rheo/feeds:0.1.0": feed, configure
 
 #let doc-title = "Math(s), Philosophy, History"
 #set document(title: doc-title, date: datetime(year: 2026, month: 8, day: 17))
 #show: template.with(current-page: "index")
 
-#let rheo-feed-exclude = true
+#let from-sessions(cfg) = (
+  ideas(tags: "session")
+    .filter(e => e.page != none and e.updated != none)
+    .map(e => (
+      id: e.id,
+      title: e.text,
+      page: e.page,
+      updated: e.updated,
+      published: e.minted,
+      summary: e.body,
+      categories: e.tags,
+    ))
+)
+
+#configure(feeds: (
+  feed(
+    title: "Math(s), Philosophy, History",
+    base-url: "https://maths.ohrg.org",
+    author: "Free Computing Lab",
+    content: none,
+    sources: (from-sessions,),
+  ),
+))
 
 #title()
 

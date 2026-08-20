@@ -1,12 +1,8 @@
 #import "template.typ": template
 #import "@rheo/rookery:0.4.0": idea
 
-// A listing vertebra, not a single post — excluded from the feed exactly as
-// about.typ and index.typ are. Each session still gets its own feed-worthy
-// unit of meaning, it is just no longer a discrete Atom entry (see the
-// session-consolidation discussion: rheo has no mechanism to date a
-// marrow-minted idea page in the feed, so per-session feed entries are gone).
-#let rheo-feed-exclude = true
+// Each session hatched below is a candidate feed entry in its own right —
+// see index.typ's `from-sessions` source, sourced via `ideas(tags: "session")`.
 #let session(tags: (), ..args) = idea(tags: ("session",) + tags, ..args)
 
 #set document(title: [Sessions])
