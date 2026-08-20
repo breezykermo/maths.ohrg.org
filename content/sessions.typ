@@ -1,9 +1,7 @@
-#import "template.typ": template
-#import "@rheo/rookery:0.4.0": idea
+#import "template.typ": session, template
 
-// Each session hatched below is a candidate feed entry in its own right —
-// see index.typ's `from-sessions` source, sourced via `ideas(tags: "session")`.
-#let session(tags: (), ..args) = idea(tags: ("session",) + tags, ..args)
+// Each session hatched below is also a feed entry — see `#session` in
+// template.typ.
 
 #set document(title: [Sessions])
 #show: template.with(current-page: "sessions")
@@ -288,4 +286,10 @@
   == 3 August 2026
 
   @grayPoincareCountermodernism2022 and @poincareFoundationsScienceScience2022
+]
+
+#session(<26-08-31>, title: [Jing on algorithm], updated: datetime(year: 2026, month: 8, day: 31))[
+  == 31 August 2026
+
+  @jingAlgorithm2026
 ]

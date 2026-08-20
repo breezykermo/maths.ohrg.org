@@ -2,9 +2,8 @@ version = "0.6.0"
 content_dir = "content"
 formats = ["html"]
 
-# `template.typ` is a library, not a page — every other `.typ` under `content/`
-# is a vertebra, so without this it would compile to its own `template.html`
-# (and land in the Atom feed as an empty entry).
+# `template.typ` is a library, not a page — without this it would compile to
+# its own `template.html`.
 [spine]
 exclude = ["template.typ"]
 

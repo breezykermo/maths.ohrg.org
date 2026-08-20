@@ -1,6 +1,9 @@
 #import "template.typ": template
 #import "@rheo/rookery:0.4.0": idea, window
 
+#set document(title: [People])
+#show: template.with(current-page: "people")
+
 #let person(tags: (), ..args) = idea(tags: ("person",) + tags, ..args)
 
 #person(<herbert-mehrtens>, title: [Herbert Mehrtens])[]

@@ -32,9 +32,9 @@ with meetings rather than with the site's standing prose. Adding a session is
 therefore one new `#session(...)` call appended to `content/sessions.typ` —
 no separate file, no list to edit.
 
-`#session` is sugar over `#idea`, defined in `template.typ` exactly as rookery's
-own `#note` and `#todo` are defined over it. It lives here rather than in the
-package because "session" is this site's vocabulary, not rookery's.
+`#session` is sugar over `#idea`, defined in `template.typ`. It lives here
+rather than in the package because "session" is this site's vocabulary, not
+rookery's.
 
 A session's id is its date, `YY-MM-DD`, passed as the label a `#session(<...>)`
 call is pinned to. Because every session shares one vertebra, `#session` carries
@@ -44,14 +44,12 @@ homepage's `sort: "date"` reads it newest first regardless. Sections within a
 session, should one accumulate notes, take the session's id plus a suffix
 (`26-08-03-notes`).
 
-`sessions.typ` is itself excluded from the Atom feed (`rheo-feed-exclude`), the
-same as `about.typ` and `index.typ`: it is a listing vertebra, not a post. Rheo
-has no mechanism to date a marrow-minted idea page for the feed (a minted page
-has no source file to parse a date from), so the one-file-per-session feed entry
-this site used to publish is gone along with the per-file structure — the site
-currently ships no Atom feed at all. `feed.xml` stops being generated the moment
-every vertebra is feed-excluded, which is now the case; the subscribe dialog's
-Atom option should be revisited before publishing.
+`#session` also emits the feed beacon that `index.typ` sources `feed.xml` from,
+so the feed carries the sessions and nothing else — the listing vertebrae
+(`index.typ`, `about.typ`, `sessions.typ`) stay out of it by hatching no
+session. Entries point at rookery's minted `ideas/<id>.html` pages, which
+cannot be transcluded, so the feed is configured `content: none`: each entry is
+a dated pointer rather than full text.
 
 A session's title is its reading, and its date is the first heading inside its
 body (`== 3 August 2026`). The title does not repeat the date because the

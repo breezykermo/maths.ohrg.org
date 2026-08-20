@@ -154,13 +154,9 @@
   padding-bottom: 0.6rem;
 }
 
-/* `@rheo/rookery-search`'s modal, themed to this site's purple rather than
-   rookery.ohrg.org's amber. On `.site-header-inner`, not `.rookery-search-
-   trigger`: `#search-modal` emits the trigger button and its `<dialog>` as
-   SIBLINGS, not one wrapping the other, so a custom property has to sit on an
-   ancestor common to both — the dialog rendering in the browser's top layer
-   only changes paint order, not the DOM tree custom properties inherit
-   through, so a shared ancestor still reaches it. */
+/* Search modal, themed purple. The properties hang on `.site-header-inner`,
+   not on the trigger: the trigger and its `<dialog>` are siblings, so they need
+   a common ancestor. (Top-layer paint order does not affect inheritance.) */
 .site-header-inner {
   --rookery-search-fg: var(--text-color);
   --rookery-search-bg: var(--background-color);
@@ -300,146 +296,57 @@
   font-weight: 600;
 }
 
-/* The subscribe control sits last in the row, pushed there together with the
-   search trigger before it — `margin-left: auto` lives on
-   `.rookery-search-trigger` now, not here, since the trigger is the FIRST of
-   the two right-aligned controls and so the one that has to claim the push.
-
-   It is a `<button>`, so it starts from the UA's button — its own font, its own
-   border, its own background — and every one of those has to be unset before
-   the header's typography can reach it. What it takes instead is the FOOTER's:
-   mono, `--label-size`, uppercase, letter-spaced. The wordmark at the other end
-   of the row is a size larger, which is the difference between the site's name
-   and a label for one thing on it. */
+/* The package ships only a neutral button reset for the trigger — placement
+   and typography are deliberately left to each site. This is ours: the same
+   uppercase mono as the search trigger beside it, so the two read as one
+   family of header controls. */
 .subscribe-btn {
-  display: flex;
-  align-items: center;
   gap: 0.45em;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
   font-family: var(--mono-font);
   font-size: var(--label-size);
   text-transform: uppercase;
   letter-spacing: 0.03em;
   color: var(--muted);
-  opacity: 0.5;
   transition: opacity 0.2s, color 0.2s;
 }
 
 .subscribe-btn:hover {
-  opacity: 1;
   color: var(--accent);
 }
 
 /* ============================================
    Subscribe dialog
 
+   The modal itself is @rheo/feeds's `feeds-modal`, which ships its own layered
+   defaults; only this site's colours stay here, as the package's
+   `--feeds-modal-*` custom properties. Unlayered, so they win without
+   `!important`.
+   ============================================ */
+.subscribe-dialog {
+  --feeds-modal-font: var(--body-font), -apple-system, BlinkMacSystemFont, sans-serif;
+  --feeds-modal-fg: var(--text-color);
+  --feeds-modal-border: var(--rule);
+  --feeds-modal-accent: var(--accent);
+  --feeds-modal-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  max-width: 22em;
+  padding: 1.25rem;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  background-color: var(--background-color);
+  line-height: 1.4;
+}
+
+.subscribe-option { border-radius: 3px; }
+
+/* ============================================
+   Subscribe dialog (notes)
+
    Rendered by `subscribe-dialog` in content/template.typ, opened by the button
    above. A modal `<dialog>` is drawn in the top layer, above every stacking
    context on the page including the sticky header's — which is why the header
    can carry it without its `z-index: 10` mattering either way.
    ============================================ */
-/* Inheritance does NOT reach into the top layer from wherever the element sits
-   in the document, so the box names its own font, colour and background rather
-   than taking the body's. `--font-size` is 16pt and the dialog's text is
-   furniture rather than prose, so it takes 1rem instead.
 
-   The border is the accent hairline the header, the footer, an idea and a
-   window all draw — the same purple line, here around four sides instead of
-   one. */
-.subscribe-dialog {
-  box-sizing: border-box;
-  max-width: 22em;
-  width: calc(100% - 2rem);
-  padding: 1.25rem;
-  border: 1px solid var(--accent);
-  border-radius: 3px;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: var(--body-font), -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 1rem;
-  line-height: 1.4;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
-}
-
-.subscribe-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.35);
-}
-
-.subscribe-dialog-close-form {
-  display: flex;
-  justify-content: flex-end;
-  margin: 0 0 0.5rem 0;
-}
-
-/* `showModal()` autofocuses the first focusable thing in the dialog, which is
-   this button — so it opens wearing a focus ring, and that is correct: it is
-   also where Escape and Tab start from. The ring is the UA's. */
-.dialog-close {
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 1.1em;
-  line-height: 1;
-  cursor: pointer;
-  color: var(--muted);
-}
-
-.dialog-close:hover {
-  color: var(--accent);
-}
-
-.subscribe-options {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-/* Two boxes, and the pair is the point: the feed and the mailing list are the
-   same offer through two channels, so neither is styled as the primary one.
-   At rest they sit in the grey `--rule` every other divider on the site uses,
-   and hovering one brings up the accent and the wash behind it — the same pair
-   of values an idea link takes on hover, so the gesture is the site's. */
-.subscribe-option {
-  padding: 0.6em 0.7em;
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  transition: border-color 0.2s, background-color 0.2s;
-}
-
-.subscribe-option:hover {
-  border-color: var(--accent);
-  background-color: var(--hover-fill);
-}
-
-/* The row is the option's NAME next to its icon, and it fills the box — so it
-   drops the underline `a` carries in prose, where an underline would read as
-   one more line inside a box already drawn with two. The box's own hover is
-   what answers the pointer. */
-.subscribe-option-link {
-  display: flex;
-  align-items: center;
-  gap: 0.6em;
-  color: var(--text-color);
-  text-decoration: none;
-  font-weight: 700;
-}
-
-.subscribe-option-desc {
-  margin: 0.35em 0 0 0;
-  font-size: var(--label-size);
-  color: var(--muted);
-}
-
-/* The one link inside a description ("RSS/Atom reader") keeps its underline and
-   drops the accent hover the `a[href^="http"]` rule above would otherwise give
-   it: it sits inside a box that already answers the pointer as a whole, and a
-   second purple response inside the first reads as two things happening. */
 .subscribe-option-desc a {
   color: inherit;
   text-decoration: underline;
@@ -822,9 +729,6 @@ section[role="doc-endnotes"] ol li a[role="doc-backlink"] {
   /* Icon-only once the header row is this tight. The button keeps its title
      attribute and the dialog says what it is the moment it opens, so the label
      is the part that can go. */
-  .subscribe-btn span {
-    display: none;
-  }
 
   /* A bottom sheet rather than a centred box: the UA's dialog centring drifts
      off-centre on mobile, where a collapsing toolbar keeps changing what the
@@ -836,45 +740,4 @@ section[role="doc-endnotes"] ol li a[role="doc-backlink"] {
      `right` is the one dropped: the sheet would sit flush left with a gap on
      the right, and a `100%` resolved against a layout viewport wider than the
      screen would overshoot and give the page a horizontal scrollbar. */
-  .subscribe-dialog {
-    position: fixed;
-    top: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0;
-    max-width: none;
-    width: auto;
-    /* Pinned to the bottom, an unconstrained box grows past the TOP of a short
-       viewport and takes its close button with it. Capped, and scrolling
-       internally instead. `dvh` tracks the collapsing toolbar; the `vh` line
-       above is the fallback where `dvh` is unsupported. */
-    max-height: 85vh;
-    max-height: 85dvh;
-    /* `overflow-y: auto` alone computes `overflow-x` up from `visible` to
-       `auto`, so one long unbroken token inside would make the sheet scroll
-       sideways. Pin the cross axis. `overscroll-behavior` stops a rubber-band
-       at the scroll limit chaining out to the page behind the backdrop. */
-    overflow-y: auto;
-    overflow-x: hidden;
-    overscroll-behavior: contain;
-    /* Clear the home indicator / gesture bar. Without it the sheet's last row
-       sits under system chrome and the whole thing reads as not-quite-flush. */
-    padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
-    border-radius: 3px 3px 0 0;
-    /* The border is the header's hairline, and the sheet's bottom edge is off
-       the screen — a line drawn there would only ever be a seam against the
-       viewport edge. */
-    border-bottom: none;
-    animation: subscribe-dialog-slide-up 0.2s ease-out;
-  }
-
-  @keyframes subscribe-dialog-slide-up {
-    from {
-      transform: translateY(100%);
-    }
-    to {
-      transform: translateY(0);
-    }
-  }
 }

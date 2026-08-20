@@ -12,26 +12,6 @@ if (window.matchMedia('(max-width: 600px)').matches) {
     el.classList.add('rheo-kp-skip');
   });
 }
-
-// The header's subscribe button opens the Atom/email dialog (`subscribe-button`
-// and `subscribe-dialog` in content/template.typ). Everything else the dialog
-// does — Escape, the focus trap, the close button's `<form method="dialog">` —
-// is the platform's, so this is the whole of the JS it needs.
-//
-// Clicking the backdrop closes it: a modal `<dialog>`'s click target is the
-// dialog ELEMENT itself when the click lands on its UA-drawn `::backdrop`
-// rather than inside the content box, which is what the equality test reads.
-document.addEventListener('DOMContentLoaded', function () {
-  const subscribeBtn = document.querySelector('.subscribe-btn');
-  const subscribeDialog = document.querySelector('#subscribe-dialog');
-  if (subscribeBtn && subscribeDialog) {
-    subscribeBtn.addEventListener('click', function () {
-      subscribeDialog.showModal();
-    });
-    subscribeDialog.addEventListener('click', function (e) {
-      if (e.target === subscribeDialog) {
-        subscribeDialog.close();
-      }
     });
   }
 });
