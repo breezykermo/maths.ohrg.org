@@ -677,6 +677,19 @@ section[role="doc-endnotes"] ol li a[role="doc-backlink"] {
   text-decoration-line: underline;
 }
 
+/* Bigger and bolder than rookery's own default (0.57rem, weight 200), and in
+   the site's own accent purple rather than the package's muted grey — the
+   homepage's `#window` calls turn this on with `show-date: true`, so a
+   session's date reads as a real piece of information on the card's hat, not
+   a faint label. `!important`: rheo emits this stylesheet BEFORE
+   rheo/rookery/rookery.css in <head>, so the package's own `.idea-date` rule
+   (same specificity) would otherwise win the cascade by loading later. */
+.idea-date {
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  color: var(--accent) !important;
+}
+
 /* ============================================
    Homepage
 

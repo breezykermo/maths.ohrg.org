@@ -50,12 +50,12 @@
   if upcoming.len() > 0 [
     = Upcoming session
 
-    #window(upcoming.map(e => e.name), folded: true)
+    #window(upcoming.map(e => e.name), folded: true, show-date: true)
   ]
 
   [
     = Past sessions
 
-    #window(past.map(e => e.name), folded: true)
+    #window(past.map(e => e.name), folded: true, show-date: true)
   ]
 }

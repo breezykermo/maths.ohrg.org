@@ -8,20 +8,47 @@
 //
 // `page` is the minted `ideas/` page: every session shares the one
 // `sessions.typ` vertebra, so that is the only per-session URL there is.
-#let session(tags: (), ..args) = {
-  let slug = str(args.pos().first())
+//
+// `authors:` names the people whose ideas were read, by id (`<sarah-pourciau>`
+// from content/authors.typ) — appended as a closing line rather than forwarded
+// blind through `..args`, since it has to land AFTER the given body. Each
+// renders via `@id`'s own `ref`, so it takes that author's resolved title
+// (the `show ref: hyperlink` rule `#show: rookery.with(...)` installs below)
+// rather than a name typed twice.
+#let session(tags: (), authors: (), ..args) = {
+  let name = args.pos().at(0)
+  let body = args.pos().at(1)
+  let named = args.named()
+  let slug = str(name)
   // A session's date rides on the `#session` call, not a per-file `#set
   // document(date:)` — there is no per-session file. It fills both Atom dates.
-  let when = args.named().at("updated", default: none)
+  let when = named.at("updated", default: none)
   item(
     id: "idea:" + slug,
-    title: args.named().title,
+    title: named.title,
     page: "ideas/" + slug + ".html",
     published: when,
     updated: when,
     categories: ("session",) + tags,
   )
-  idea(tags: ("session",) + tags, minted: when, ..args)
+  // `ref()` resolves against the REAL Typst label `#idea` attaches, which is
+  // the full prefixed id (`<idea:sarah-pourciau>`), not the bare one an
+  // author is named by here (`<sarah-pourciau>`) — `_norm`'s bare/full
+  // equivalence is rookery's own registry lookup, not Typst's native label
+  // matching, so the prefix has to be rebuilt by hand.
+  let full-body = if authors.len() == 0 {
+    body
+  } else {
+    body + par[Authors: #authors.map(a => ref(label("idea:" + str(a)))).join(", ")]
+  }
+  idea(
+    name,
+    title: named.title,
+    tags: ("session",) + tags,
+    minted: when,
+    updated: when,
+    full-body,
+  )
 }
 
 #let THEME = (
