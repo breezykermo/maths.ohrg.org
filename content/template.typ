@@ -1,10 +1,9 @@
 #import "@rheo/rookery:0.4.0": idea, rookery
 #import "@rheo/rookery-search:0.4.0": search-modal
 #import "@rheo/justify:0.1.1": template as justify-template
-#import "@rheo/feeds:0.1.0": feeds-modal, item, mail-icon
 
-// A session is an idea tagged `session`, plus the feed beacon `index.typ`
-// sources from. Defined once here; `sessions.typ` imports it.
+// A session is an idea tagged `session`. Defined once here; `sessions.typ`
+// imports it.
 //
 // `page` is the minted `ideas/` page: every session shares the one
 // `sessions.typ` vertebra, so that is the only per-session URL there is.
@@ -19,18 +18,9 @@
   let name = args.pos().at(0)
   let body = args.pos().at(1)
   let named = args.named()
-  let slug = str(name)
   // A session's date rides on the `#session` call, not a per-file `#set
-  // document(date:)` — there is no per-session file. It fills both Atom dates.
+  // document(date:)` — there is no per-session file.
   let when = named.at("updated", default: none)
-  item(
-    id: "idea:" + slug,
-    title: named.title,
-    page: "ideas/" + slug + ".html",
-    published: when,
-    updated: when,
-    categories: ("session",) + tags,
-  )
   // `ref()` resolves against the REAL Typst label `#idea` attaches, which is
   // the full prefixed id (`<idea:sarah-pourciau>`), not the bare one an
   // author is named by here (`<sarah-pourciau>`) — `_norm`'s bare/full
@@ -94,22 +84,6 @@
       // placeholder: "Search sessions",
       // trigger-label: "Search sessions",
       // tags: "session",
-    )
-    #feeds-modal(
-      icon-size: 16,
-      feed-desc: [Pull each new session into an #html.elem("a", attrs: (
-        href: "https://aboutfeeds.com",
-        target: "_blank",
-        rel: "noopener",
-      ))[RSS/Atom reader].],
-      options: (
-        (
-          icon: mail-icon(),
-          label: "Mailing list",
-          href: "mailto:maths@ohrg.org?subject=JOIN",
-          desc: [To join, email #html.elem("strong")[maths\@ohrg.org] with #html.elem("strong")[JOIN] in the subject line, and a 1--2 sentence explanation of your interest in the group.],
-        ),
-      ),
     )
   ]
 ]
