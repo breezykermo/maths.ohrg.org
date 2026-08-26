@@ -39,13 +39,8 @@
 #context {
   let today = datetime.today()
   let sessions = ideas(tags: "session")
-  let upcoming = sessions
-    .filter(e => e.created != none and e.created >= today)
-    .sorted(key: e => e.created)
-  let past = sessions
-    .filter(e => e.created == none or e.created < today)
-    .sorted(key: e => e.created)
-    .rev()
+  let upcoming = sessions.filter(e => e.created != none and e.created >= today).sorted(key: e => e.created)
+  let past = sessions.filter(e => e.created == none or e.created < today).sorted(key: e => e.created).rev()
 
   if upcoming.len() > 0 [
     = Upcoming session

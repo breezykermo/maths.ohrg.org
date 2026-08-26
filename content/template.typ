@@ -102,10 +102,10 @@
     #feeds-modal(
       icon-size: 16,
       feed-desc: [Pull each new session into an #html.elem("a", attrs: (
-        href: "https://aboutfeeds.com",
-        target: "_blank",
-        rel: "noopener",
-      ))[RSS/Atom reader].],
+          href: "https://aboutfeeds.com",
+          target: "_blank",
+          rel: "noopener",
+        ))[RSS/Atom reader].],
       options: (
         (
           icon: mail-icon(),
