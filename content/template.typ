@@ -1,5 +1,5 @@
-#import "@rheo/rookery:0.4.1": idea, rookery
-#import "@rheo/rookery-search:0.4.1": search-modal
+#import "@rheo/rookery:0.5.0": idea, rookery
+#import "@rheo/rookery-search:0.5.0": search-modal
 #import "@rheo/justify:0.1.1": template as justify-template
 #import "@rheo/feeds:0.1.0": feeds-modal, item, mail-icon
 
@@ -98,10 +98,10 @@
     #feeds-modal(
       icon-size: 16,
       feed-desc: [Pull each new session into an #html.elem("a", attrs: (
-        href: "https://aboutfeeds.com",
-        target: "_blank",
-        rel: "noopener",
-      ))[RSS/Atom reader].],
+          href: "https://aboutfeeds.com",
+          target: "_blank",
+          rel: "noopener",
+        ))[RSS/Atom reader].],
       options: (
         (
           icon: mail-icon(),
