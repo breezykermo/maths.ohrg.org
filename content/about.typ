@@ -1,5 +1,5 @@
 #import "template.typ": template
-#import "@rheo/rookery:0.4.0": idea
+#import "@rheo/rookery:0.4.1": idea
 
 #set document(title: [About], date: datetime(year: 2026, month: 8, day: 17))
 #show: template.with(current-page: "about")
