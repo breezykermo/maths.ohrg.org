@@ -1,4 +1,4 @@
-version = "0.6.1"
+version = "0.6.2"
 content_dir = "content"
 formats = ["html"]
 
@@ -12,8 +12,18 @@ css_stylesheet = "./style.css"
 js_scripts = "./index.js"
 
 # `@rookery` is its own repository and namespace, so nothing resolves it by
-# default — rheo has to be told where it comes from. Assets are the ordinary
-# `<name>-<version>.tar.gz` release tarballs, and the local package cache is
-# checked before the network, so a checkout of the family resolves offline.
+# default — rheo has to be told where it comes from.
+#
+# THE BRANCH, not a release, and deliberately: the 0.1.0 family has not merged
+# yet, and a repository ref is consumable as it stands — the source is the
+# artifact, so there is nothing to publish first and every push is picked up on
+# the next build. rheo checks the ref out and keys its cache by the resolved
+# commit, so a moved branch is a natural cache miss rather than a stale hit.
+#
+# SWAP THIS FOR `releases = "freecomputinglab/rookery"` ONCE 0.1.0 MERGES. The
+# branch is expected to disappear at that point, and this stops resolving the
+# moment it does. The import specs do not change either way — that is the whole
+# point of the coordinate scheme.
 [packages.rookery]
-releases = "freecomputinglab/rookery"
+repo = "https://github.com/freecomputinglab/rookery"
+branch = "0.1.0"
