@@ -682,7 +682,7 @@ section[role="doc-endnotes"] ol li a[role="doc-backlink"] {
    homepage's `#window` calls turn this on with `show-date: true`, so a
    session's date reads as a real piece of information on the card's hat, not
    a faint label. `!important`: rheo emits this stylesheet BEFORE
-   rheo/rookery/rookery.css in <head>, so the package's own `.idea-date` rule
+   rookery/core/core.css in <head>, so the package's own `.idea-date` rule
    (same specificity) would otherwise win the cascade by loading later. */
 .idea-date {
   font-size: 0.8rem !important;
@@ -708,7 +708,7 @@ section[role="doc-endnotes"] ol li a[role="doc-backlink"] {
    ============================================ */
 @media (max-width: 600px) {
   body {
-    /* `0.5em`, the same value `@rheo/rookery` uses for a note's own indent at
+    /* `0.5em`, the same value `@rookery/core` uses for a note's own indent at
        every width, so the page's outer margin and the indent inside a note read
        as one measure rather than two unrelated numbers. Relative, so it tracks
        the 14pt below it instead of freezing 12px against a resized body. */
