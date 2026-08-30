@@ -1,5 +1,5 @@
 #import "template.typ": template
-#import "@rheo/rookery:0.4.1": idea, window
+#import "@rookery/core:0.1.0": idea, window
 
 #set document(title: [Authors])
 #show: template.with(current-page: "authors")

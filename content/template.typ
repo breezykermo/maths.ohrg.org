@@ -1,5 +1,5 @@
-#import "@rheo/rookery:0.4.1": idea, rookery
-#import "@rheo/rookery-search:0.4.1": search-modal
+#import "@rookery/core:0.1.0": idea, rookery
+#import "@rookery/search:0.1.0": search-modal
 #import "@rheo/justify:0.1.1": template as justify-template
 #import "@rheo/feeds:0.1.0": feeds-modal, item, mail-icon
 
@@ -41,12 +41,16 @@
   } else {
     body + par[Authors: #authors.map(a => ref(label("idea:" + str(a)))).join(", ")]
   }
+  // `created:` is the ONE date rookery stores per note as of 0.1.0. The old
+  // `minted:`/`updated:` pair went with the reset: a hand-maintained second
+  // date can contradict the note's actual history, so lifecycle moved to
+  // `@rookery/timeline`. A session has a single authored date anyway — when it
+  // happens — so it lands in the one slot and `index.typ` splits on it.
   idea(
     name,
     title: named.title,
     tags: ("session",) + tags,
-    minted: when,
-    updated: when,
+    created: when,
     full-body,
   )
 }

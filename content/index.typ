@@ -1,5 +1,5 @@
 #import "template.typ": template
-#import "@rheo/rookery:0.4.1": idea, ideas, window
+#import "@rookery/core:0.1.0": idea, ideas, window
 #import "@rheo/feeds:0.1.0": configure, feed, items
 
 #let doc-title = "Math(s), Philosophy, History"
@@ -40,11 +40,11 @@
   let today = datetime.today()
   let sessions = ideas(tags: "session")
   let upcoming = sessions
-    .filter(e => e.updated != none and e.updated >= today)
-    .sorted(key: e => e.updated)
+    .filter(e => e.created != none and e.created >= today)
+    .sorted(key: e => e.created)
   let past = sessions
-    .filter(e => e.updated == none or e.updated < today)
-    .sorted(key: e => e.updated)
+    .filter(e => e.created == none or e.created < today)
+    .sorted(key: e => e.created)
     .rev()
 
   if upcoming.len() > 0 [

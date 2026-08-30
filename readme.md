@@ -89,8 +89,8 @@ failing.
 Cloudflare Pages, `bash scripts/build.sh`, publishing `build/html` (see
 `wrangler.toml` — the build command and the build cache are set in the Pages UI,
 not here). The script downloads the rheo binary named in `rheo.toml` and lets
-rheo fetch `@rheo/rookery`, `@rheo/rookery-search` and `@rheo/justify` from the
-rheo-packages releases, so there is nothing to install.
+rheo fetch `@rookery/core`, `@rookery/search` and `@rheo/justify` from their own
+repositories' releases, so there is nothing to install.
 
 `template.typ` is a library, not a page, so `rheo.toml` excludes it from the
 spine — otherwise every `.typ` under `content/` compiles to its own page.
