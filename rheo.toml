@@ -1,4 +1,4 @@
-version = "0.6.0"
+version = "0.6.1"
 content_dir = "content"
 formats = ["html"]
 
@@ -10,3 +10,10 @@ exclude = ["template.typ"]
 [html.assets]
 css_stylesheet = "./style.css"
 js_scripts = "./index.js"
+
+# `@rookery` is its own repository and namespace, so nothing resolves it by
+# default — rheo has to be told where it comes from. Assets are the ordinary
+# `<name>-<version>.tar.gz` release tarballs, and the local package cache is
+# checked before the network, so a checkout of the family resolves offline.
+[packages.rookery]
+releases = "freecomputinglab/rookery"
