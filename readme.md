@@ -68,21 +68,38 @@ declares one. Entries point at rookery's minted `ideas/<id>.html` pages, which
 cannot be transcluded, so the feed is configured `content: none`: each entry is
 a dated pointer rather than full text.
 
-A session's title is its reading, and its date is the first heading inside its
-body (`== 3 August 2026`). The title does not repeat the date because the
-`[idea:26-08-03]` permalink beside it already carries it, in every listing the
-session appears in.
+A session's title is its reading, and everything else about the session is a
+LIST PASSED TO `#session` rather than prose written into its body: `reading:`
+the works read, `authors:` the people who wrote them. Both are declared by id
+(`<grayPlatosGhostModernist2008>`, `<jeremy-gray>`) and rendered as refs, so no
+title or name is typed twice and each entry links to its own note. A reading
+entry is either a bare id or `(id, pages)` — `(<grayPlatosGhostModernist2008>,
+"pp.18-38")` — for a session that read a stretch of one work.
+
+`#session` draws the three of them, date first, as a table at the head of the
+note: deliberately the same block `@rookery/bibtex` puts at the foot of a
+citation note, classes and all, so the site has one table convention rather than
+two. The date is formatted from `updated:` — a session states its date once, and
+what a body still carries is only whatever was said on the day. Most are empty.
+The title does not repeat the date either, because the `[idea:26-08-03]`
+permalink beside it already carries it, in every listing the session appears in.
 
 The homepage is built from the same parts. Its `prelude` is a titleless idea —
 `#title()` above it already carries the site's name — and `focus` and `history`
 reach it as folded `#window`s rather than as copies, so their content lives on
 `nest/about.typ` alone.
 
-Citations belong to the session that writes them: rookery emits a References
-block per idea, which is what makes each session a self-contained record of its
-reading. `author-title.csl` is non-numeric deliberately — Typst's citation
+Citations belong to the note that writes them: rookery emits a References block
+per idea. `author-title.csl` is non-numeric deliberately — Typst's citation
 numbering is document-wide and cannot be reset, so a numeric style would show an
 idea's only reference as `[7]`.
+
+A SESSION'S READING IS NOT A TYPST CITE, and that is the one place the two
+diverge. `@key[pp.18-38]` renders an anchor into a `#bibliography` no vertebra
+here prints, so every session that named page numbers carried a link to a
+`#loc-N` that does not exist. `reading:` refs the work's minted note instead and
+sets the pages beside it as text, which links somewhere real. A note writing
+ABOUT a work still cites it normally, and gets its References block.
 
 ## Fonts
 

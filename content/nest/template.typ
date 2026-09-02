@@ -7,13 +7,40 @@
 // `page` is the minted `ideas/` page: every session shares the one
 // `sessions.typ` vertebra, so that is the only per-session URL there is.
 //
-// `authors:` names the people whose ideas were read, by id (`<sarah-pourciau>`
-// from content/authors.typ) — appended as a closing line rather than forwarded
-// blind through `..args`, since it has to land AFTER the given body. Each
-// renders via `@id`'s own `ref`, so it takes that author's resolved title
-// (the `show ref: hyperlink` rule `#show: rookery.with(...)` installs below)
-// rather than a name typed twice.
-#let session(tags: (), authors: (), ..args) = {
+// `reading:` names the works read, and `authors:` the people who wrote them, by
+// id (`<grayPlatosGhostModernist2008>`, `<sarah-pourciau>`) — declared as lists
+// rather than written into the prose, so a session's record is data the note
+// carries rather than a sentence someone remembered to type. Both are prepended
+// as a header block rather than forwarded blind through `..args`, since they
+// have to land BEFORE the given body. Each entry renders via `@id`'s own `ref`,
+// so it takes that note's resolved title (the `show ref: hyperlink` rule
+// `#show: rookery.with(...)` installs below) rather than a name typed twice.
+//
+// A READING ENTRY IS EITHER a bare id or `(id, pages)` — `(<grayPlatosGhost…>,
+// "pp.18-38")` — the pages trailing the title as written. No ambiguity between
+// the two forms, since one entry is always one work: an array is a work and its
+// pages, never two works. The pages ride ALONGSIDE the ref rather than inside a
+// Typst `cite` supplement (`@key[pp.18-38]`, which is what the prose used to
+// carry) because a bare cite renders an anchor into a `#bibliography` this site
+// never prints — a dead `#loc-1` link on every session that named page numbers.
+//
+// THE HEADER IS THE CITATION BLOCK'S TWIN. A citation note ends with
+// `@rookery/bibtex`'s `bib-fields` — a muted label over a two-column table of
+// the work's fields — and a session note opens with the same table of what was
+// read, so the two take the SAME markup and therefore the same gutter,
+// hairlines and label sizes for free: `.citation-fields-head` and
+// `.citation-fields` are styled by bibtex.css, which every page links. As a
+// `<p>` of body prose this read as a stray sentence rather than as the note's
+// record. Only the spacing is the site's own — see `.session-fields` in
+// style.css, since the package's gap is measured for a block that FOLLOWS prose.
+//
+// THE DATE IS A ROW HERE rather than the `== 3 August 2026` heading each body
+// used to open with. It is the same kind of fact as the reading and the people,
+// so it belongs in the same table, and a heading below that table would have
+// stranded the session's date under its own metadata. It is formatted from
+// `updated:`, which every session already carries, so no session states its
+// date twice — and the two cannot now disagree.
+#let session(tags: (), reading: (), authors: (), ..args) = {
   let name = args.pos().at(0)
   let body = args.pos().at(1)
   let named = args.named()
@@ -29,14 +56,49 @@
     categories: ("session",) + tags,
   )
   // `ref()` resolves against the REAL Typst label `#idea` attaches, which is
-  // the full prefixed id (`<idea:sarah-pourciau>`), not the bare one an
-  // author is named by here (`<sarah-pourciau>`) — `_norm`'s bare/full
+  // the full prefixed id (`<idea:sarah-pourciau>`), not the bare one a work or
+  // an author is named by here (`<sarah-pourciau>`) — `_norm`'s bare/full
   // equivalence is rookery's own registry lookup, not Typst's native label
   // matching, so the prefix has to be rebuilt by hand.
-  let full-body = if authors.len() == 0 {
+  let as-ref = id => ref(label("idea:" + str(id)))
+  let work = w => {
+    if type(w) == array {
+      as-ref(w.at(0))
+      ", " + w.at(1)
+    } else {
+      as-ref(w)
+    }
+  }
+  // `[day padding:none]` because the default pads to two digits, and no session
+  // was ever written up as "09 August 2024".
+  let rows = ()
+  if when != none {
+    rows.push(("Date", when.display("[day padding:none] [month repr:long] [year]")))
+  }
+  // ONE WORK PER LINE, not a comma list: a resolved citation title carries its
+  // own commas ("Meli, Equivalence and Priority (1993)"), so two of them joined
+  // by another comma read as one long work rather than two.
+  if reading.len() > 0 {
+    rows.push(("Reading", reading.map(work).join(html.elem("br"))))
+  }
+  if authors.len() > 0 {
+    rows.push(("Authors", authors.map(as-ref).join(", ")))
+  }
+  let full-body = if rows.len() == 0 {
     body
   } else {
-    body + par[Authors: #authors.map(a => ref(label("idea:" + str(a)))).join(", ")]
+    html.elem("div", attrs: (class: "citation-fields-head session-fields-head"), "Session")
+    html.elem(
+      "dl",
+      attrs: (class: "citation-fields session-fields"),
+      rows
+        .map(((term, value)) => {
+          html.elem("dt", term)
+          html.elem("dd", value)
+        })
+        .join(),
+    )
+    body
   }
   // `created:` is the ONE date rookery stores per note as of 0.1.0. The old
   // `minted:`/`updated:` pair went with the reset: a hand-maintained second
@@ -80,6 +142,7 @@
   show-fields: (
     "file": false,
     "urldate": false,
+    "type": false,
   ),
 )
 #let citation = BIBTEX.citation

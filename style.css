@@ -414,24 +414,27 @@ h1.idea {
   margin-top: 0.25em;
 }
 
-/* A session's date, which it carries as the first heading inside its own body
-   (`== 3 August 2026` in content/YY-MM-DD.typ) now that the title carries only
-   the reading. The 0.75em above every heading is the space between one section
-   and the last, and there is no last one here — the idea's own title is directly
-   above, already contributing 0.25em below itself, so the two collapsed to a
-   hole between a session's name and its date.
+/* A SESSION'S METADATA TABLE — its date, its reading, its authors — which
+   `#session` draws as the first thing inside the note's own body. Deliberately
+   the same block @rookery/bibtex draws at the foot of a citation note, classes
+   and all, so a reader meets one table convention on this site rather than two:
+   everything about how it looks (the 7.5em gutter, the hairline per row, the
+   muted uppercase field names) is bibtex.css's, and the ONLY thing said here is
+   the spacing, which cannot be inherited because the package measures its gaps
+   for a block that FOLLOWS prose and this one precedes it.
 
-   Two selectors for the three places the same body renders: after the head
-   block on the session's page and on the minted page alike (rookery 0.3.0 wraps
-   an idea's permalink tab and its heading in `.idea-head`, so the date is that
-   DIV's sibling, not the heading's — `.idea + h3` matched nothing after the
-   upgrade), and as the first child of a `#window`'s body on the homepage.
-   Scoped to a heading in exactly THAT position rather than to `h3` at large, so
-   a session that later grows real sub-sections keeps the normal section spacing
-   for them. */
-.idea-head + h3,
-.idea-window-body > h3:first-child {
+   The 1.2rem above the label is that gap, and there is nothing above this block
+   to be separated from but the idea's own title, which already contributes
+   0.25em below itself. Mirrors that instead — the same reasoning as `h1.idea`.
+   The gap the package does not leave BELOW the table is added here for the
+   sessions that carry prose after it (a guest introduced, a discussion noted):
+   without it the first line of that prose sits against the table's last rule. */
+.session-fields-head {
   margin-top: 0.25em;
+}
+
+.session-fields {
+  margin-bottom: 1.2rem;
 }
 
 /* The site's own name, `#title()` on the homepage — the one heading that is

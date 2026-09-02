@@ -6,6 +6,11 @@
 
 #let person = tagged-idea("person")
 
+#person(<kermode-lachlan>, title: [Lachlan Kermode])[]
+#person(<stewart-william>, title: [William Stewart])[]
+#person(<case-holly>, title: [Holly Case])[]
+#person(<vanburns-austen>, title: [Austen Van Burns])[]
+
 #person(<herbert-mehrtens>, title: [Herbert Mehrtens])[]
 #person(<jeremy-gray>, title: [Jeremy Gray])[]
 #person(<sarah-pourciau>, title: [Sarah Pourciau])[]
