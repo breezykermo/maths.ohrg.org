@@ -114,9 +114,4 @@
     `this is particularly interesting as a site of intervention for CS education, i.e. building a distribution system rather than a bank.`
   - birds, _rewilding_ the metaphors of systems and software.
   - is this a *more materialst intervention* on the politics of the algorithm as a concept?
-
-
-
-
-
 ]

@@ -296,3 +296,9 @@
 
   @idea:jingAlgorithm2026
 ]
+
+#session(<26-09-14>, title: [Handelman on the mathematical imagination], authors: (<handelman-matthew>,), updated: datetime(year: 2026, month: 9, day: 14))[
+  == 14 September 2026
+
+  @idea:handelmanMathematicalImaginationOrigins2019
+]

@@ -216,6 +216,7 @@
     theme: THEME,
     idea-page-template: idea-page,
     bibliography: BIBLIOGRAPHY,
+    show-context: false,
   )
   show: chrome.with(current-page: current-page)
   doc
