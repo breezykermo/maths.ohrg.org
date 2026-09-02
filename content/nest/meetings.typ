@@ -194,9 +194,9 @@
   authors: (<weatherby-leif>,),
   updated: datetime(year: 2025, month: 9, day: 22),
 )[
-  We were lucky to have @idea:weatherby-leif present.
+  We were lucky to have @maths:weatherby-leif present.
 
-  Introduced by @idea:stewart-william.
+  Introduced by @maths:stewart-william.
 ]
 
 #session(
@@ -331,9 +331,9 @@
   authors: (<jing-felicia>,),
   updated: datetime(year: 2026, month: 8, day: 31),
 )[
-  We were lucky to have @idea:jing-felicia as a participant.
+  We were lucky to have @maths:jing-felicia as a participant.
 
-  Introduced by @idea:kermode-lachlan.
+  Introduced by @maths:kermode-lachlan.
 
   #window(<algorithmic-materiality>, folded: false)
 ]

@@ -60,7 +60,7 @@
   /* Two families, split by what a thing IS rather than by where it sits.
 
      Berkeley Mono is site furniture and identifiers — the wordmark and a
-     session's `[idea:26-08-03]` id. It marks the parts of the page that are
+     session's `[maths:26-08-03]` id. It marks the parts of the page that are
      machinery rather than writing.
 
      Inter is everything that is writing: every heading, and an idea's own
@@ -361,7 +361,7 @@
    Base Layout
    ============================================ */
 /* Every navigational affordance on this site lands on a fragment — an idea's
-   `[idea:26w32-etal]` permalink, an outline row, a backlink, the Context link —
+   `[maths:26w32-etal]` permalink, an outline row, a backlink, the Context link —
    and a sticky header would otherwise cover whatever each of them jumped to.
    Clears the bar plus a little air. */
 html {
@@ -490,7 +490,7 @@ h1.idea {
    summary the id would otherwise take the body's Inter (reduced again inside the
    footer), and in `#idea`'s tab the ambient face.
 
-   Left as written, neither small-caps nor uppercased: `[idea:26-08-03]` is an
+   Left as written, neither small-caps nor uppercased: `[maths:26-08-03]` is an
    identifier to be copied verbatim into `#window("...")`, and a reader who
    retyped what an uppercased id appeared to say would get it wrong. */
 .idea-label {

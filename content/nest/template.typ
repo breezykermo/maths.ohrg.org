@@ -4,6 +4,25 @@
 #import "@rheo/justify:0.1.1": template as justify-template
 #import "@rheo/feeds:0.1.0": feeds-modal, item, mail-icon
 
+// THE ID PREFIX every note on this site is minted under, so a permalink reads
+// `[maths:26-08-03]` and a reference is written `@maths:26-08-03`. rookery's own
+// default is `idea`, which named the PACKAGE's vocabulary rather than this
+// site's; a note here belongs to maths, and the id is the most-repeated piece of
+// text on the page.
+//
+// SET IN TWO PLACES BECAUSE ONLY ONE OF THEM CAN BE COMPUTED. `#show: rookery`
+// below takes it as `prefix:`, which is what mints the labels, and the two refs
+// this file builds by hand read it from here — but a reference written in prose
+// is Typst markup (`@maths:focus`), and no constant can reach inside that. So
+// changing this is this line, the `prefix:` it feeds, and a sweep of the `@`
+// forms across `content/`.
+//
+// WHAT IS NOT DERIVED FROM IT: the minted pages stay at `ideas/<slug>.html` and
+// the CSS hooks stay `.idea-title`, `.idea-ref`, `.idea-tag-session` — both are
+// constants in `@rookery/core`, not functions of the prefix. So no URL moved and
+// no stylesheet changed with this rename; only the ids and the anchors did.
+#let PREFIX = "maths"
+
 // `page` is the minted `ideas/` page: every session shares the one
 // `sessions.typ` vertebra, so that is the only per-session URL there is.
 //
@@ -47,6 +66,13 @@
   let slug = str(name)
   let when = named.at("updated", default: none)
   // Mark session as an item for the Atom/RSS feed.
+  //
+  // `idea:` HERE IS FROZEN, and deliberately no longer `PREFIX`. An Atom entry's
+  // `<id>` is a permanent name for the entry, not a description of it: a reader
+  // that has seen `idea:24-06-21` treats `maths:24-06-21` as a different entry
+  // and re-notifies every subscriber about all 39 sessions. The string is opaque
+  // to everything but that comparison — it is never rendered, never linked, and
+  // never resolved against a note — so it costs nothing to leave it as issued.
   item(
     id: "idea:" + slug,
     title: named.title,
@@ -56,11 +82,11 @@
     categories: ("session",) + tags,
   )
   // `ref()` resolves against the REAL Typst label `#idea` attaches, which is
-  // the full prefixed id (`<idea:sarah-pourciau>`), not the bare one a work or
+  // the full prefixed id (`<maths:sarah-pourciau>`), not the bare one a work or
   // an author is named by here (`<sarah-pourciau>`) — `_norm`'s bare/full
   // equivalence is rookery's own registry lookup, not Typst's native label
   // matching, so the prefix has to be rebuilt by hand.
-  let as-ref = id => ref(label("idea:" + str(id)))
+  let as-ref = id => ref(label(PREFIX + ":" + str(id)))
   let work = w => {
     if type(w) == array {
       as-ref(w.at(0))
@@ -276,6 +302,7 @@
 
 #let template(current-page: none, doc) = {
   show: rookery.with(
+    prefix: PREFIX,
     theme: THEME,
     idea-page-template: idea-page,
     bibliography: BIBLIOGRAPHY,

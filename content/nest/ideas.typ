@@ -13,30 +13,30 @@
   title: [The Mathematical Imagination: On the Origins and Promise of Critical Theory],
 )[
 
-  - Author: @idea:handelman-matthew[Matthew Handelman].
+  - Author: @maths:handelman-matthew[Matthew Handelman].
   - Published: 2019.
 
-  Introduces @idea:negative-mathematics[negative mathematics] as a riposte to dismissing mathematics as aligned with an uncritical, capitalist notion of progress.
+  Introduces @maths:negative-mathematics[negative mathematics] as a riposte to dismissing mathematics as aligned with an uncritical, capitalist notion of progress.
 ]
 
 #idea(<negative-mathematics>, title: [Negative Mathematics])[
-  Coined in the introduction to  @idea:handelmanMathematicalImaginationOrigins2019[his book], 'negative mathematics' is Handelman's bid to name an approach to critical theory, mathematics, computer science, and the digital humanities which takes mathematics seriously as a part of an emancipatory project.
+  Coined in the introduction to  @maths:handelmanMathematicalImaginationOrigins2019[his book], 'negative mathematics' is Handelman's bid to name an approach to critical theory, mathematics, computer science, and the digital humanities which takes mathematics seriously as a part of an emancipatory project.
 
-  Humanists ought not to treat mathematics solely as a discipline and syntax of thought inrecupreably allied with capital, a viewpoint that Handelman argues has washed over the humanities since the 1930 debate between @idea:horkheimer-max[Horkheimer]/@idea:adorno-theodor[Adorno] (the Frankfurt School / critical theory) and @idea:neurath-otto[Neurath]/@idea:carnap-rudolf[Carnap] (the Vienna Circle / logical positivism),
+  Humanists ought not to treat mathematics solely as a discipline and syntax of thought inrecupreably allied with capital, a viewpoint that Handelman argues has washed over the humanities since the 1930 debate between @maths:horkheimer-max[Horkheimer]/@maths:adorno-theodor[Adorno] (the Frankfurt School / critical theory) and @maths:neurath-otto[Neurath]/@maths:carnap-rudolf[Carnap] (the Vienna Circle / logical positivism),
 ]
 
 #essay(<horkheimerDialecticEnlightenment2002>, title: [Dialectic of Enlightenment])[
-  - Author: @idea:horkheimer-max[Max Horkheimer] and @idea:adorno-theodor[Theodor Adorno]
+  - Author: @maths:horkheimer-max[Max Horkheimer] and @maths:adorno-theodor[Theodor Adorno]
   - Published: 1947.
 ]
 
 #citation(<jingAlgorithm2026>, tags: "essay")[
-  - Author: @idea:jing-felicia.
+  - Author: @maths:jing-felicia.
   - Published: 2026.
 ]
 
 #idea(<algorithmic-materiality>, title: [Algorithmic Materiality])[
-  I'm delighted to kick off the Autumn/Fall with @idea:jing-felicia's essay here in the _Math(s), Philosophy, History_ reading group.
+  I'm delighted to kick off the Autumn/Fall with @maths:jing-felicia's essay here in the _Math(s), Philosophy, History_ reading group.
 
   [as we have her here as a guest at my invitation, I'll get us started with some remarks.]
 

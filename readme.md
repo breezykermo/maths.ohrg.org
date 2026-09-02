@@ -24,7 +24,7 @@ Everything a reader does not browse directly lives one level down, in
 | `content/sessions.typ` | the record: every session, transcluded by tag, newest first |
 | `content/people.typ` | everyone read and everyone reading, transcluded by tag |
 | `content/texts.typ` | every work read, transcluded by tag |
-| `content/nest/template.typ` | site chrome, and the single place rookery is configured — theme, bibliography, `idea-page-template`, and the `#session` helper |
+| `content/nest/template.typ` | site chrome, and the single place rookery is configured — the `maths:` id prefix, theme, bibliography, `idea-page-template`, and the `#session` helper |
 | `content/nest/meetings.typ` | the register of sessions, one `#session` call per meeting, oldest first |
 | `content/nest/authors.typ` | the register of people, one `#person` call each |
 | `content/nest/bibliography.typ` | the register of works: the sweep that mints a note per `references.bib` entry |
@@ -61,6 +61,26 @@ homepage's `sort: "date"` reads it newest first regardless. Sections within a
 session, should one accumulate notes, take the session's id plus a suffix
 (`26-08-03-notes`).
 
+## Ids
+
+Every note on the site is minted under the `maths:` prefix, so a permalink reads
+`[maths:26-08-03]` and a reference is written `@maths:26-08-03`. It is `PREFIX`
+in `template.typ`, handed to `#show: rookery` as `prefix:`; rookery's own default
+is `idea`, which names the package's vocabulary rather than this site's. Renaming
+it again means that constant, and a sweep of the `@` forms across `content/` —
+a reference in prose is Typst markup, and no constant can reach inside it.
+
+Two things do NOT follow the prefix, both being constants in `@rookery/core`
+rather than functions of it: minted pages stay at `ideas/<slug>.html`, and the
+CSS hooks stay `.idea-title`, `.idea-ref`, `.idea-tag-session`. So the `idea`→
+`maths` rename moved no URL and touched no stylesheet — only the ids, and the
+`#maths:<slug>` anchors on them.
+
+The Atom entry ids in `feed.xml` are frozen at `idea:<slug>`, and that is not an
+oversight: an entry id is a permanent name for the entry, so rewriting it would
+have every reader re-notify every subscriber about all 39 past sessions. The
+string is opaque — never rendered, never linked, never resolved against a note.
+
 `#session` also emits the feed beacon that `index.typ` sources `feed.xml` from,
 so the feed carries the sessions and nothing else — every other vertebra stays
 out of it by hatching no session, `meetings.typ` being the only file that
@@ -81,7 +101,7 @@ note: deliberately the same block `@rookery/bibtex` puts at the foot of a
 citation note, classes and all, so the site has one table convention rather than
 two. The date is formatted from `updated:` — a session states its date once, and
 what a body still carries is only whatever was said on the day. Most are empty.
-The title does not repeat the date either, because the `[idea:26-08-03]`
+The title does not repeat the date either, because the `[maths:26-08-03]`
 permalink beside it already carries it, in every listing the session appears in.
 
 The homepage is built from the same parts. Its `prelude` is a titleless idea —
@@ -105,7 +125,7 @@ ABOUT a work still cites it normally, and gets its References block.
 
 Two families, split by what a thing is rather than where it sits. **Berkeley
 Mono** is site furniture and identifiers — the wordmark, the search input, and a
-session's `[idea:26-08-03]` id — marking the parts of the page that are
+session's `[maths:26-08-03]` id — marking the parts of the page that are
 machinery rather than writing. **Inter** is everything that is writing: every
 heading, and a session's own title.
 
