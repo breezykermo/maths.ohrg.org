@@ -71,7 +71,21 @@
 // No `tagged-idea:` — this site is plain `@rookery/core` with no timeline or
 // todo skin, so the factory's own default (core's `tagged-idea`) is already
 // the right one.
-#let BIBTEX = bibtex(read("references.bib"))
+//
+// `show-fields` keys are BIBTEX FIELD NAMES, not the terms the block prints, and
+// the two differ for exactly the field wanted here: the `Accessed` row is
+// `urldate`. A key naming no field hides nothing and says nothing about it.
+//
+// Both rows are Zotero's bookkeeping rather than anything about the work.
+// `file` also carries an absolute path out of whoever exported the library,
+// which has no business on a published page.
+#let BIBTEX = bibtex(
+  read("references.bib"),
+  show-fields: (
+    "file": false,
+    "urldate": false,
+  ),
+)
 #let citation = BIBTEX.citation
 #let citations-as-ideas = BIBTEX.all
 #let bib-fields = BIBTEX.fields
