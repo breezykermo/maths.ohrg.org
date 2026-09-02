@@ -292,10 +292,32 @@
 // it is stored on a document-wide state, and an inline closure would be a
 // different value in every vertebra. Applies `chrome`, not `template`, or the
 // two would reference each other.
+//
+// `session-page` IS A CLASS FOR ONE RULE: hiding a session's `<h1>` on its own
+// page (see `.session-page h1.idea` in style.css). A session's title is its
+// reading — "Handelman on the mathematical imagination" — which is what a
+// listing needs and what this page does not: the header table under it names the
+// same reading, its authors and its date, so the heading says it twice.
+//
+// A CLASS RATHER THAN NOT EMITTING THE HEADING, because the heading is not this
+// file's to emit. `@rookery/core` mints the page — `.marrow.typ` builds the
+// permalink tab, the `<h1>`, the body and the footer as one content value and
+// hands the whole thing here as `doc` — and core has no way to leave the title
+// out of it (as of 0.1.0). Filed as `rookery-e4y`, which adds `show-title:` to
+// `#idea`/`rookery()` on the model of the `show-context:` pair; this wrapper
+// comes out when that lands.
+//
+// The tab keeps the page's `[maths:26-09-14]` id, its `session` pill and its
+// date, so a page with no heading still names itself.
 #let idea-page(id: none, note: (:), doc) = {
   show: chrome.with(current-page: id)
-  doc
-  if id != none and "citation" in note.at("tags", default: (:)) {
+  let tags = note.at("tags", default: (:))
+  if "session" in tags {
+    html.elem("div", attrs: (class: "session-page"), doc)
+  } else {
+    doc
+  }
+  if id != none and "citation" in tags {
     bib-fields(id.split(":").last())
   }
 }

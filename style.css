@@ -414,6 +414,28 @@ h1.idea {
   margin-top: 0.25em;
 }
 
+/* A SESSION'S OWN PAGE DOES NOT REPEAT ITS TITLE. The title is the session's
+   reading ("Handelman on the mathematical imagination"), which is what a window
+   summary, a reference and the browser tab need — and what this page does not:
+   the metadata table directly below names the same reading, its authors and its
+   date. It stays everywhere else; only the `<h1>` on the note's own page goes.
+
+   `display: none` on the WHOLE heading rather than on the `.idea-title` span
+   inside it: an emptied `h1` keeps the margins above and below it and leaves a
+   hole where the title was.
+
+   The heading also carries the page's anchor id, and losing it costs nothing
+   here — the anchor is the top of the page, which is where a fragment link
+   lands anyway.
+
+   `.session-page` is `idea-page`'s wrapper in content/nest/template.typ, and the
+   whole rule is a stand-in for `@rookery/core` growing a `show-title:` option
+   (filed as `rookery-e4y`): the heading is minted by the package, so a site
+   cannot decline to emit it — only hide it. */
+.session-page h1.idea {
+  display: none;
+}
+
 /* A SESSION'S METADATA TABLE — its date, its reading, its authors — which
    `#session` draws as the first thing inside the note's own body. Deliberately
    the same block @rookery/bibtex draws at the foot of a citation note, classes

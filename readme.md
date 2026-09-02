@@ -101,6 +101,13 @@ note: deliberately the same block `@rookery/bibtex` puts at the foot of a
 citation note, classes and all, so the site has one table convention rather than
 two. The date is formatted from `updated:` — a session states its date once, and
 what a body still carries is only whatever was said on the day. Most are empty.
+
+Because that table names the reading, a session's minted page does NOT repeat it
+as a heading: `idea-page` wraps such a page in `.session-page` and `style.css`
+hides the `<h1>` there. The title is untouched everywhere else — every window
+summary, every reference, the browser tab. It is a stand-in: rookery mints the
+heading itself and has no way to leave it out, so hiding it is all a site can do
+(filed upstream as `rookery-e4y`, which adds `show-title:`).
 The title does not repeat the date either, because the `[maths:26-08-03]`
 permalink beside it already carries it, in every listing the session appears in.
 
