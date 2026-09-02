@@ -1,5 +1,6 @@
 #import "@rookery/core:0.1.0": idea, rookery
 #import "@rookery/search:0.1.0": search-modal
+#import "@rookery/bibtex:0.1.0": bibtex
 #import "@rheo/justify:0.1.1": template as justify-template
 #import "@rheo/feeds:0.1.0": feeds-modal, item, mail-icon
 
@@ -66,6 +67,14 @@
   bytes(read("references.bib")),
   style: bytes(read("author-title.csl")),
 )
+
+// No `tagged-idea:` — this site is plain `@rookery/core` with no timeline or
+// todo skin, so the factory's own default (core's `tagged-idea`) is already
+// the right one.
+#let BIBTEX = bibtex(read("references.bib"))
+#let citation = BIBTEX.citation
+#let citations-as-ideas = BIBTEX.all
+#let bib-fields = BIBTEX.fields
 
 #let site-pages = (
   sys.inputs.at("rheo-context", default: (spine-flat: ())).spine-flat.filter(v => v.handle not in ("index", "sessions"))
@@ -176,6 +185,9 @@
 #let idea-page(id: none, note: (:), doc) = {
   show: chrome.with(current-page: id)
   doc
+  if id != none and "citation" in note.at("tags", default: (:)) {
+    bib-fields(id.split(":").last())
+  }
 }
 
 #let template(current-page: none, doc) = {

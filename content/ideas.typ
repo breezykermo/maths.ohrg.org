@@ -1,4 +1,4 @@
-#import "template.typ": template
+#import "template.typ": citation, template
 #import "@rookery/core:0.1.0": idea, tagged-idea, window
 
 #set document(title: [Ideas])
@@ -30,7 +30,7 @@
   - Published: 1947.
 ]
 
-#essay(<jingAlgorithm2026>, title: [Algorithm])[
+#citation(<jingAlgorithm2026>, tags: "essay")[
   - Author: @idea:jing-felicia.
   - Published: 2026.
 ]
