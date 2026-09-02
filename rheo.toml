@@ -3,7 +3,7 @@ content_dir = "content"
 formats = ["html"]
 
 [spine]
-exclude = ["template.typ"]
+exclude = ["nest/template.typ"]
 
 [html.assets]
 css_stylesheet = "./style.css"

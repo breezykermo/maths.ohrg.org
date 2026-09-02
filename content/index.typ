@@ -1,4 +1,4 @@
-#import "template.typ": template
+#import "nest/template.typ": template
 #import "@rookery/core:0.1.0": idea, ideas, window
 #import "@rheo/feeds:0.1.0": configure, feed, items
 

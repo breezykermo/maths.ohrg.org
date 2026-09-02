@@ -2,7 +2,7 @@
 #import "@rookery/core:0.1.0": idea
 
 #set document(title: [About], date: datetime(year: 2026, month: 8, day: 17))
-#show: template.with(current-page: "about")
+#show: template.with(current-page: "nest:about")
 
 #idea(<history>, title: [Our history in brief])[
   - _June 2024._ First meeting.

@@ -4,9 +4,6 @@
 #import "@rheo/justify:0.1.1": template as justify-template
 #import "@rheo/feeds:0.1.0": feeds-modal, item, mail-icon
 
-// A session is an idea tagged `session`, plus the feed beacon `index.typ`
-// sources from. Defined once here; `sessions.typ` imports it.
-//
 // `page` is the minted `ideas/` page: every session shares the one
 // `sessions.typ` vertebra, so that is the only per-session URL there is.
 //
@@ -21,9 +18,8 @@
   let body = args.pos().at(1)
   let named = args.named()
   let slug = str(name)
-  // A session's date rides on the `#session` call, not a per-file `#set
-  // document(date:)` — there is no per-session file. It fills both Atom dates.
   let when = named.at("updated", default: none)
+  // Mark session as an item for the Atom/RSS feed.
   item(
     id: "idea:" + slug,
     title: named.title,
@@ -90,25 +86,29 @@
 #let citations-as-ideas = BIBTEX.all
 #let bib-fields = BIBTEX.fields
 
-// THE BAR CARRIES THREE PAGES — `sessions`, `people`, `texts` — and every other
-// vertebra is off it for one of three reasons, none of them oversight.
+// THE BAR IS THE TOP LEVEL OF `content/`, less the wordmark. Nothing here
+// names a page: the filter drops `index` (which the wordmark already carries)
+// and everything under `content/nest/`, so where a vertebra sits on disk is
+// the only thing that decides whether it appears, and adding a bar entry is a
+// file move rather than an edit to this list.
 //
-// THREE ARE REGISTERS. `bibliography` runs the sweep that mints a note per
+// WHAT IS IN THE NEST, and why none of it belongs on the bar. THREE ARE
+// REGISTERS: `bibliography` runs the sweep that mints a note per
 // `references.bib` entry, `authors` declares one per person, and `meetings`
 // declares one per session held. A note renders where it is declared, so a
-// register cannot also be the page a reader browses: the three bar pages
-// transclude these by tag instead, and each register stays reachable but unlisted.
-//
-// `ideas` is off the bar because its notes are reached through the search modal
-// and through the backlinks on whatever cites them, not through a list of
-// everything.
-//
-// `index` is the wordmark, and `about` is off the bar because the index page
-// already carries that prose — a reader landing on the site reads it there.
+// register cannot also be the page a reader browses — the three bar pages
+// (`sessions`, `people`, `texts`) transclude these by tag instead, and each
+// register stays reachable but unlisted. `ideas` is nested because its notes
+// are reached through the search modal and through the backlinks on whatever
+// cites them, not through a list of everything. `about` is nested because the
+// index page already carries that prose — a reader landing on the site reads
+// it there.
 #let site-pages = (
-  sys.inputs.at("rheo-context", default: (spine-flat: ())).spine-flat.filter(v => (
-    v.handle not in ("index", "about", "ideas", "bibliography", "authors", "meetings")
-  ))
+  sys
+    .inputs
+    .at("rheo-context", default: (spine-flat: ()))
+    .spine-flat
+    .filter(v => v.handle != "index" and not v.handle.starts-with("nest:"))
 )
 
 // Every page link goes through `link(label(<handle>))`, never a written

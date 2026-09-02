@@ -2,7 +2,7 @@
 #import "@rookery/core:0.1.0": tagged-idea
 
 #set document(title: [Authors])
-#show: template.with(current-page: "authors")
+#show: template.with(current-page: "nest:authors")
 
 #let person = tagged-idea("person")
 

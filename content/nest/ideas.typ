@@ -2,7 +2,7 @@
 #import "@rookery/core:0.1.0": idea, tagged-idea, window
 
 #set document(title: [Ideas])
-#show: template.with(current-page: "ideas")
+#show: template.with(current-page: "nest:ideas")
 
 #let book = tagged-idea("book")
 #let essay = tagged-idea("essay")

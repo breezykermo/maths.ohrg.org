@@ -7,7 +7,7 @@
 // Each session hatched below is also a feed entry — see `#session` in template.typ.
 
 #set document(title: [Meetings])
-#show: template.with(current-page: "meetings")
+#show: template.with(current-page: "nest:meetings")
 
 #session(<24-06-21>, title: [Pourciau on number and the digital ocean], authors: (<sarah-pourciau>,), updated: datetime(
   year: 2024,
