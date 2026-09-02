@@ -6,10 +6,7 @@
 #set document(title: doc-title, date: datetime(year: 2026, month: 8, day: 17))
 #show: template.with(current-page: "index")
 
-// Sessions and nothing else: `items()` reads the beacons `#session` emits, which
-// is `meetings.typ` alone — every listing vertebra transcludes those notes rather
-// than declaring them, so none of them emits a beacon to pick up.
-// `content: none` is required — a minted page cannot be transcluded.
+// Only the `#session` idea emits an item beacon, meaning that this is a feed only of all sessions.
 #configure(feeds: (
   feed(
     title: "Math(s), Philosophy, History",
@@ -33,12 +30,6 @@
   To join our mailing list, please email #link("mailto:maths@ohrg.org?subject=JOIN")[maths\@ohrg.org] with the subject header 'JOIN', and a 1-2 sentence explanation of your interest in the group.
 ]
 
-#window((<focus>, <history>), folded: true)
-
-// WHAT IS COMING, AND NOTHING BEHIND IT. The record of past sessions is the
-// `sessions` page; this one is the front door, so it carries the prelude above
-// and the next meeting here.
-//
 // Split on build-time "now" rather than a tag: a session leaves this list of its
 // own accord once its date is behind us, with no per-session edit here.
 #context {
@@ -53,3 +44,8 @@
     #window(upcoming.map(e => e.name), folded: true, show-date: true)
   ]
 }
+
+= More about the group
+
+#window((<focus>, <history>), folded: true)
+

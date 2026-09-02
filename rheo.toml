@@ -10,5 +10,5 @@ css_stylesheet = "./style.css"
 js_scripts = "./index.js"
 
 [packages.rookery]
-repo = "/home/lox/code/_rheo/rookery"
+repo = "https://github.com/freecomputinglab/rookery"
 branch = "0.1.0"
