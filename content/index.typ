@@ -6,8 +6,9 @@
 #set document(title: doc-title, date: datetime(year: 2026, month: 8, day: 17))
 #show: template.with(current-page: "index")
 
-// Sessions and nothing else: `items()` reads the beacons `#session` emits, so
-// the listing vertebrae (this page, `about.typ`, `sessions.typ`) stay out.
+// Sessions and nothing else: `items()` reads the beacons `#session` emits, which
+// is `meetings.typ` alone — every listing vertebra transcludes those notes rather
+// than declaring them, so none of them emits a beacon to pick up.
 // `content: none` is required — a minted page cannot be transcluded.
 #configure(feeds: (
   feed(
@@ -34,23 +35,21 @@
 
 #window((<focus>, <history>), folded: true)
 
-// Split on build-time "now", not a tag: a session moves itself from upcoming
-// to past once its date is behind us, with no per-session edit required here.
+// WHAT IS COMING, AND NOTHING BEHIND IT. The record of past sessions is the
+// `sessions` page; this one is the front door, so it carries the prelude above
+// and the next meeting here.
+//
+// Split on build-time "now" rather than a tag: a session leaves this list of its
+// own accord once its date is behind us, with no per-session edit here.
 #context {
   let today = datetime.today()
-  let sessions = ideas(tags: "session")
-  let upcoming = sessions.filter(e => e.created != none and e.created >= today).sorted(key: e => e.created)
-  let past = sessions.filter(e => e.created == none or e.created < today).sorted(key: e => e.created).rev()
+  let upcoming = ideas(tags: "session")
+    .filter(e => e.created != none and e.created >= today)
+    .sorted(key: e => e.created)
 
   if upcoming.len() > 0 [
     = Upcoming session
 
     #window(upcoming.map(e => e.name), folded: true, show-date: true)
-  ]
-
-  [
-    = Past sessions
-
-    #window(past.map(e => e.name), folded: true, show-date: true)
   ]
 }

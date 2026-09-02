@@ -625,19 +625,12 @@ section[role="doc-endnotes"] ol li a[role="doc-backlink"] {
   padding-top: 0.6rem;
 }
 
-/* Three slots, and the outer two share the leftover space equally — that is
-   what puts the middle one on the CONTAINER's centre line rather than on the
-   centre of whatever the other two happen to leave. `margin-left: auto` on the
-   last item would right-align it just as well but would centre the middle one
-   only by accident, and only while the two ends were the same width. */
+/* Two slots sharing the leftover space equally, which is what holds each at its
+   own end of the row. `margin-left: auto` on the last item would right-align it
+   just as well, but this way neither end depends on the other's width. */
 .footer-start,
 .colophon {
   flex: 1 1 0;
-}
-
-.footer-center {
-  flex: 0 1 auto;
-  text-align: center;
 }
 
 .colophon {
@@ -725,7 +718,6 @@ section[role="doc-endnotes"] ol li a[role="doc-backlink"] {
   }
 
   .footer-start,
-  .footer-center,
   .colophon {
     flex: none;
     text-align: center;

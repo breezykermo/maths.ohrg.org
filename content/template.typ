@@ -90,20 +90,24 @@
 #let citations-as-ideas = BIBTEX.all
 #let bib-fields = BIBTEX.fields
 
-// FOUR VERTEBRAE ARE OFF THE BAR, each for its own reason, and none by oversight.
+// THE BAR CARRIES THREE PAGES — `sessions`, `people`, `texts` — and every other
+// vertebra is off it for one of three reasons, none of them oversight.
 //
-// `bibliography` and `authors` are REGISTERS: the first runs the sweep that mints
-// a note per `references.bib` entry, the second declares one per person. A note
-// renders where it is declared, so a register cannot also be the page a reader
-// browses — `texts` and `people` transclude them by tag instead.
+// THREE ARE REGISTERS. `bibliography` runs the sweep that mints a note per
+// `references.bib` entry, `authors` declares one per person, and `meetings`
+// declares one per session held. A note renders where it is declared, so a
+// register cannot also be the page a reader browses: the three bar pages
+// transclude these by tag instead, and each register stays reachable but unlisted.
 //
 // `ideas` is off the bar because its notes are reached through the search modal
 // and through the backlinks on whatever cites them, not through a list of
-// everything. `sessions` and `index` are the two the bar has never carried: the
-// wordmark is the index, and every session is reached from it.
+// everything.
+//
+// `index` is the wordmark, and `about` is off the bar because the index page
+// already carries that prose — a reader landing on the site reads it there.
 #let site-pages = (
   sys.inputs.at("rheo-context", default: (spine-flat: ())).spine-flat.filter(v => (
-    v.handle not in ("index", "sessions", "bibliography", "authors", "ideas")
+    v.handle not in ("index", "about", "ideas", "bibliography", "authors", "meetings")
   ))
 )
 
@@ -155,23 +159,13 @@
 ]
 
 // The header's mirror image: same flex row, same hairline (on top), same mono
-// labels. Three slots rather than two, because the middle one is what centres —
-// "Our focus" is the entry point for a reader who landed on a single session
-// with no idea what the group is.
-//
-// `link(label("idea:focus"))` rather than an href, so it resolves to the anchor
-// the idea sits on and stays depth-correct from a minted session page.
+// labels. Two slots, one at each end and nothing between them.
 #let site-footer() = html.elem("footer", attrs: (class: "site-footer"))[
   #html.elem("div", attrs: (class: "site-footer-inner"))[
     #html.elem(
       "span",
       attrs: (class: "footer-start"),
       link("https://freecomputinglab.ohrg.org")[Free Computing Lab],
-    )
-    #html.elem(
-      "span",
-      attrs: (class: "footer-center"),
-      link(label("idea:focus"))[Our focus],
     )
     #html.elem(
       "span",
