@@ -1,54 +1,12 @@
 #import "template.typ": template
-#import "@rookery/core:0.1.0": tagged-idea
+#import "@rookery/core:0.1.0": window
 
 #set document(title: [People])
 #show: template.with(current-page: "people")
 
-#let person = tagged-idea("person")
+Everyone the group has read, and everyone who has read with us.
 
-#person(<herbert-mehrtens>, title: [Herbert Mehrtens])[]
-#person(<jeremy-gray>, title: [Jeremy Gray])[]
-#person(<sarah-pourciau>, title: [Sarah Pourciau])[]
-#person(<aaron-scott>, title: [Scott Aaronson])[]
-#person(<atiyah-michael>, title: [Michael Atiyah])[]
-#person(<avigad-jeremy>, title: [Jeremy Avigad])[]
-#person(<babbage-charles>, title: [Charles Babbage])[]
-#person(<benacerraf-paul>, title: [Paul Benacerraf])[]
-#person(<berkeley-george>, title: [George Berkeley])[]
-#person(<castelle-michael>, title: [Michael Castelle])[]
-#person(<deringer-william>, title: [William Deringer])[]
-#person(<henkle-jonah>, title: [Jonah Henkle])[]
-#person(<horl-erich>, title: [Erich Hörl])[]
-#person(<husserl-edmund>, title: [Edmund Husserl])[]
-#person(<joque-justin>, title: [Justin Joque])[]
-#person(<krieger-martin>, title: [Martin Krieger])[]
-#person(<longo-giuseppe>, title: [Giuseppe Longo])[]
-#person(<marx-george>, title: [George Marx])[]
-#person(<marx-karl>, title: [Karl Marx])[]
-#person(<mazzotti-massimo>, title: [Massimo Mazzotti])[]
-#person(<meli-domenico>, title: [Domenico Meli])[]
-#person(<miller-jacques>, title: [Jacques Miller])[]
-#person(<naderi-reza>, title: [Reza Naderi])[]
-#person(<peirce-charles>, title: [Charles Peirce])[]
-#person(<poincare-henri>, title: [Henri Poincaré])[]
-#person(<rodin-andrei>, title: [Andrei Rodin])[]
-#person(<ruda-frank>, title: [Frank Ruda])[]
-#person(<schmid-eric>, title: [Eric Schmid])[]
-#person(<serres-michel>, title: [Michel Serres])[]
-#person(<siegert-bernhard>, title: [Bernhard Siegert])[]
-#person(<weatherby-leif>, title: [Leif Weatherby])[]
-#person(<vasilie-na-a>, title: [N. A. Vasiliev])[]
-#person(<vonfoerster-heinz>, title: [Heinz Von Foerster])[]
-#person(<vonneumann-john>, title: [John von Neumann])[]
-#person(<warwick-andrew>, title: [Andrew Warwick])[]
-#person(<thurston-william>, title: [William P. Thurston])[]
-#person(<turing-alan>, title: [Alan Turing])[]
-#person(<steingart-alma>, title: [Alma Steingart])[]
-#person(<bernoulli-daniel>, title: [Daniel Bernoulli])[]
-#person(<bernoulli-johann>, title: [Johann Bernoulli])[]
-#person(<jing-felicia>, title: [Felicia Jing])[]
-#person(<handelman-matthew>, title: [Matthew Handelman])[]
-#person(<adorno-theodor>, title: [Theodor Adorno])[]
-#person(<horkheimer-max>, title: [Max Horkheimer])[]
-#person(<neurath-otto>, title: [Otto Neurath])[]
-#person(<carnap-rudolf>, title: [Rudolf Carnap])[]
+// A TAG SELECTION, so this page cannot fall behind the register: the notes are
+// declared on `authors.typ`, and naming them one by one here would be a second
+// list to keep in step with the first.
+#window(tags: "person")

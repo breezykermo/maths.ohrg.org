@@ -76,13 +76,20 @@
 #let citations-as-ideas = BIBTEX.all
 #let bib-fields = BIBTEX.fields
 
-// `bibliography` is off the bar deliberately, not by oversight: that vertebra
-// exists to run the sweep that mints a note per `references.bib` entry, and
-// `texts` is where a reader browses them. Two pages, because `#citations-as-ideas`
-// emits its notes inline at the call site while `texts` transcludes them.
+// FOUR VERTEBRAE ARE OFF THE BAR, each for its own reason, and none by oversight.
+//
+// `bibliography` and `authors` are REGISTERS: the first runs the sweep that mints
+// a note per `references.bib` entry, the second declares one per person. A note
+// renders where it is declared, so a register cannot also be the page a reader
+// browses — `texts` and `people` transclude them by tag instead.
+//
+// `ideas` is off the bar because its notes are reached through the search modal
+// and through the backlinks on whatever cites them, not through a list of
+// everything. `sessions` and `index` are the two the bar has never carried: the
+// wordmark is the index, and every session is reached from it.
 #let site-pages = (
   sys.inputs.at("rheo-context", default: (spine-flat: ())).spine-flat.filter(v => (
-    v.handle not in ("index", "sessions", "bibliography")
+    v.handle not in ("index", "sessions", "bibliography", "authors", "ideas")
   ))
 )
 
