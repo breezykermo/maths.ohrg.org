@@ -60,7 +60,7 @@
   /* Two families, split by what a thing IS rather than by where it sits.
 
      Berkeley Mono is site furniture and identifiers — the wordmark and a
-     session's `[idea:26-08-03]` id. It marks the parts of the page that are
+     session's `[maths:26-08-03]` id. It marks the parts of the page that are
      machinery rather than writing.
 
      Inter is everything that is writing: every heading, and an idea's own
@@ -361,7 +361,7 @@
    Base Layout
    ============================================ */
 /* Every navigational affordance on this site lands on a fragment — an idea's
-   `[idea:26w32-etal]` permalink, an outline row, a backlink, the Context link —
+   `[maths:26w32-etal]` permalink, an outline row, a backlink, the Context link —
    and a sticky header would otherwise cover whatever each of them jumped to.
    Clears the bar plus a little air. */
 html {
@@ -414,24 +414,49 @@ h1.idea {
   margin-top: 0.25em;
 }
 
-/* A session's date, which it carries as the first heading inside its own body
-   (`== 3 August 2026` in content/YY-MM-DD.typ) now that the title carries only
-   the reading. The 0.75em above every heading is the space between one section
-   and the last, and there is no last one here — the idea's own title is directly
-   above, already contributing 0.25em below itself, so the two collapsed to a
-   hole between a session's name and its date.
+/* A SESSION'S OWN PAGE DOES NOT REPEAT ITS TITLE. The title is the session's
+   reading ("Handelman on the mathematical imagination"), which is what a window
+   summary, a reference and the browser tab need — and what this page does not:
+   the metadata table directly below names the same reading, its authors and its
+   date. It stays everywhere else; only the `<h1>` on the note's own page goes.
 
-   Two selectors for the three places the same body renders: after the head
-   block on the session's page and on the minted page alike (rookery 0.3.0 wraps
-   an idea's permalink tab and its heading in `.idea-head`, so the date is that
-   DIV's sibling, not the heading's — `.idea + h3` matched nothing after the
-   upgrade), and as the first child of a `#window`'s body on the homepage.
-   Scoped to a heading in exactly THAT position rather than to `h3` at large, so
-   a session that later grows real sub-sections keeps the normal section spacing
-   for them. */
-.idea-head + h3,
-.idea-window-body > h3:first-child {
+   `display: none` on the WHOLE heading rather than on the `.idea-title` span
+   inside it: an emptied `h1` keeps the margins above and below it and leaves a
+   hole where the title was.
+
+   The heading also carries the page's anchor id, and losing it costs nothing
+   here — the anchor is the top of the page, which is where a fragment link
+   lands anyway.
+
+   `.session-page` is `idea-page`'s wrapper in content/nest/template.typ, and the
+   whole rule is a stand-in for `@rookery/core` growing a `show-title:` option
+   (filed as `rookery-e4y`): the heading is minted by the package, so a site
+   cannot decline to emit it — only hide it. */
+.session-page h1.idea {
+  display: none;
+}
+
+/* A SESSION'S METADATA TABLE — its date, its reading, its authors — which
+   `#session` draws as the first thing inside the note's own body. Deliberately
+   the same block @rookery/bibtex draws at the foot of a citation note, classes
+   and all, so a reader meets one table convention on this site rather than two:
+   everything about how it looks (the 7.5em gutter, the hairline per row, the
+   muted uppercase field names) is bibtex.css's, and the ONLY thing said here is
+   the spacing, which cannot be inherited because the package measures its gaps
+   for a block that FOLLOWS prose and this one precedes it.
+
+   The 1.2rem above the label is that gap, and there is nothing above this block
+   to be separated from but the idea's own title, which already contributes
+   0.25em below itself. Mirrors that instead — the same reasoning as `h1.idea`.
+   The gap the package does not leave BELOW the table is added here for the
+   sessions that carry prose after it (a guest introduced, a discussion noted):
+   without it the first line of that prose sits against the table's last rule. */
+.session-fields-head {
   margin-top: 0.25em;
+}
+
+.session-fields {
+  margin-bottom: 1.2rem;
 }
 
 /* The site's own name, `#title()` on the homepage — the one heading that is
@@ -487,7 +512,7 @@ h1.idea {
    summary the id would otherwise take the body's Inter (reduced again inside the
    footer), and in `#idea`'s tab the ambient face.
 
-   Left as written, neither small-caps nor uppercased: `[idea:26-08-03]` is an
+   Left as written, neither small-caps nor uppercased: `[maths:26-08-03]` is an
    identifier to be copied verbatim into `#window("...")`, and a reader who
    retyped what an uppercased id appeared to say would get it wrong. */
 .idea-label {
@@ -625,19 +650,12 @@ section[role="doc-endnotes"] ol li a[role="doc-backlink"] {
   padding-top: 0.6rem;
 }
 
-/* Three slots, and the outer two share the leftover space equally — that is
-   what puts the middle one on the CONTAINER's centre line rather than on the
-   centre of whatever the other two happen to leave. `margin-left: auto` on the
-   last item would right-align it just as well but would centre the middle one
-   only by accident, and only while the two ends were the same width. */
+/* Two slots sharing the leftover space equally, which is what holds each at its
+   own end of the row. `margin-left: auto` on the last item would right-align it
+   just as well, but this way neither end depends on the other's width. */
 .footer-start,
 .colophon {
   flex: 1 1 0;
-}
-
-.footer-center {
-  flex: 0 1 auto;
-  text-align: center;
 }
 
 .colophon {
@@ -725,7 +743,6 @@ section[role="doc-endnotes"] ol li a[role="doc-backlink"] {
   }
 
   .footer-start,
-  .footer-center,
   .colophon {
     flex: none;
     text-align: center;
