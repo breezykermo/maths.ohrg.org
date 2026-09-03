@@ -21,7 +21,7 @@
 
 #idea(<prelude>)[
   #emph(doc-title) is an online reading group run by the #link("https://freecomputinglab.ohrg.org")[Free Computing Lab].
-  We read texts at the interface of mathematics, history, and philosophy.
+  We read texts at the interface of mathematics, philosophy, and history.
   See @maths:focus[our focus] for more info.
 
   We meet on an approximately bi-weekly basis during the academic semester.
