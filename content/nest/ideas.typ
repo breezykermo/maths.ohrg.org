@@ -8,6 +8,12 @@
 #let essay = tagged-idea("essay")
 #let meeting = tagged-idea("meeting")
 
+
+#essay(<jamesVectorsLeibnizEinstein2023>, title: [Vectors from Leibniz to Einstein])[
+  - Author: @maths:propp-james[James Propp].
+  - Published: 2023.
+]
+
 #book(
   <handelmanMathematicalImaginationOrigins2019>,
   title: [The Mathematical Imagination: On the Origins and Promise of Critical Theory],

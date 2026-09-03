@@ -36,6 +36,7 @@
 #person(<naderi-reza>, title: [Reza Naderi])[]
 #person(<peirce-charles>, title: [Charles Peirce])[]
 #person(<poincare-henri>, title: [Henri Poincaré])[]
+#person(<propp-james>, title: [James Propp])[]
 #person(<rodin-andrei>, title: [Andrei Rodin])[]
 #person(<ruda-frank>, title: [Frank Ruda])[]
 #person(<schmid-eric>, title: [Eric Schmid])[]

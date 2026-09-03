@@ -339,9 +339,17 @@
 ]
 
 #session(
-  <26-09-14>,
+  <26-09-30>,
   title: [Handelman on the mathematical imagination],
   reading: (<handelmanMathematicalImaginationOrigins2019>,),
   authors: (<handelman-matthew>,),
-  updated: datetime(year: 2026, month: 9, day: 14),
+  updated: datetime(year: 2026, month: 9, day: 30),
+)[]
+
+#session(
+  <26-09-16>,
+  title: [James on vectors from Leibniz to Einstein],
+  reading: (<jamesVectorsLeibnizEinstein2023>,),
+  authors: (<propp-james>,),
+  updated: datetime(year: 2026, month: 9, day: 16),
 )[]
