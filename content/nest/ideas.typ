@@ -44,14 +44,10 @@
 #idea(<algorithmic-materiality>, title: [Algorithmic Materiality])[
   I'm delighted to kick off the Autumn/Fall with @maths:jing-felicia's essay here in the _Math(s), Philosophy, History_ reading group.
 
-  [as we have her here as a guest at my invitation, I'll get us started with some remarks.]
+  Felicia Jing just completed a PhD in Political Theory at Johns Hopkins University, is a visiting fellow at NYU's Remarque Institute this Fall, and will be joining Brown University in the Spring 2027 for a postdoc in the Program of Science, Technology, and Society.
+  The essay we read today is a condensed version of her dissertation's first chapter that is forthcoming in _Political Concepts: A Critical Lexicon_.
 
-  - just completed a PhD in Political Theory at Johns Hopkins University
-  - is a visiting fellow at NYU's Remarque Institute this Fall
-  - will be joining Brown University in the Spring 2027 for a postdoc in the Program of Science, Technology, and Society.
-  - The essay we read today is a condensed version of her dissertation's first chapter that is forthcoming in _Political Concepts: A Critical Lexicon_.
-
-  This essay offers us a new, I think, and more materialist angle on the history and politics of computer science.
+  This essay offers us a new and more materialist angle on the history and politics of computer science.
   The materiality of the algorithm is, following Marx, not only the economy of the hardware on which it runs, but also the socio-political logic that _structures_ developments in hardware, software, and programming.
   The substitution of software for hardware when it comes to questions of its economy---a substition spirited in no small part in media studies by Friedrich Kittler's infamous claim that "there is no software"---displaces rather than addressses the question of the politics and historicity of computing.
 
