@@ -348,8 +348,8 @@
 
 #session(
   <26-09-16>,
-  title: [James on vectors from Leibniz to Einstein],
-  reading: (<jamesVectorsLeibnizEinstein2023>,),
+  title: [Propp on vectors from Leibniz to Einstein],
+  reading: (<proppVectorsLeibnizEinstein2023>,),
   authors: (<propp-james>,),
   updated: datetime(year: 2026, month: 9, day: 16),
 )[]

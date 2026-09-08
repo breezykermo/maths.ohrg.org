@@ -9,7 +9,7 @@
 #let meeting = tagged-idea("meeting")
 
 
-#essay(<jamesVectorsLeibnizEinstein2023>, title: [Vectors from Leibniz to Einstein])[
+#essay(<proppVectorsLeibnizEinstein2023>, title: [Vectors from Leibniz to Einstein])[
   - Author: @maths:propp-james[James Propp].
   - Published: 2023.
 ]
